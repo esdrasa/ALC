@@ -5,4 +5,4 @@ void imprimeMatriz(double** matriz, int n);
 
 void imprimeVetor(double* v, int n);
 
-#endif // OPERACOES_H_INCLUDED
+#endif // SAIDA_H_INCLUDED
