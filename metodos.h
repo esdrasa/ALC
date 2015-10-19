@@ -17,4 +17,4 @@ e retornará 1 não ocorra problemas.
 */
 int lu(double** a, double** l, double** u, int n);
 
-#endif // OPERACOES_H_INCLUDED
+#endif // METODOS_H_INCLUDED
