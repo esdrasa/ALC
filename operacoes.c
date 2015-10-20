@@ -209,3 +209,22 @@ double normaF(double** matriz, int n)
 
     return norma;
 }
+
+double normaLinha(double** matriz, int n)
+{
+    int i, j;
+    double norma = -1, soma = 0;
+
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < n; j++)
+            soma += fabs(matriz[i][j]);
+
+        if(soma > norma)
+            norma = soma;
+
+        soma = 0;
+    }
+
+    return norma;
+}
