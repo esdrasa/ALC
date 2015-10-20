@@ -88,5 +88,14 @@ Calcula a norma coluna (norma 1) de uma matriz de tamanho n
 */
 double normaColuna(double** matriz, int n);
 
+/**
+Calcula a norma dois de um vetor de tamanho n
+*/
+double normaDois(double* vetor, int n);
+
+/**
+Calcula o angulo entre dois vetores de tamanho n
+*/
+double angulo(double* v1, double* v2, int n);
 
 #endif // OPERACOES_H_INCLUDED
