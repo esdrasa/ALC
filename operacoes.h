@@ -83,5 +83,10 @@ Calcula a norma linha (infinita) de uma matriz de tamanho n
 */
 double normaLinha(double** matriz, int n);
 
+/**
+Calcula a norma coluna (norma 1) de uma matriz de tamanho n
+*/
+double normaColuna(double** matriz, int n);
+
 
 #endif // OPERACOES_H_INCLUDED
