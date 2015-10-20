@@ -78,5 +78,10 @@ Calcula a norma de Frobenius de uma matriz de tamanho n
 */
 double normaF(double** matriz, int n);
 
+/**
+Calcula a norma linha (infinita) de uma matriz de tamanho n
+*/
+double normaLinha(double** matriz, int n);
+
 
 #endif // OPERACOES_H_INCLUDED
