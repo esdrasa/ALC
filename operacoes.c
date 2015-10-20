@@ -247,3 +247,25 @@ double normaColuna(double** matriz, int n)
 
     return norma;
 }
+
+double normaDois(double* vetor, int n)
+{
+    int i;
+    double norma = 0;
+
+    for(i = 0; i < n; i++)
+        norma += vetor[i] * vetor[i];
+
+    norma = sqrt(norma);
+
+    return norma;
+}
+
+double angulo(double* v1, double* v2, int n)
+{
+    double t;
+
+    t = acos(produtoEscalar(v1, v2, n) / (normaDois(v1, n) * normaDois(v2, n)));
+
+    return t;
+}
