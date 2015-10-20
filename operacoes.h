@@ -73,5 +73,10 @@ Retorna da matriz b à matriz a. Ambas de tamanho n.
 */
 double** subtraiMatrizes(double** a, double** b, int n);
 
+/**
+Calcula a norma de Frobenius de uma matriz de tamanho n
+*/
+double normaF(double** matriz, int n);
+
 
 #endif // OPERACOES_H_INCLUDED
