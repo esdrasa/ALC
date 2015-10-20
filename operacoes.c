@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <math.h>
 
 double** criaMatriz(int n)
 {
@@ -193,4 +194,18 @@ double** subtraiMatrizes(double** a, double** b, int n)
             result[i][j] = a[i][j] - b[i][j];
 
     return result;
+}
+
+double normaF(double** matriz, int n)
+{
+    int i, j;
+    double norma = 0;
+
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++)
+            norma += matriz[i][j] * matriz[i][j];
+
+    norma = sqrt(norma);
+
+    return norma;
 }
