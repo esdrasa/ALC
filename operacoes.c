@@ -293,3 +293,16 @@ double detVandermonde(double** a, int n)
 
     return d;
 }
+
+double* getColuna(double** matriz, int coluna, int n)
+{
+    double* vetor;
+    int i;
+
+    vetor = criaVetor(n);
+
+    for(i = 0; i < n; i++)
+        vetor[i] = matriz[i][coluna];
+
+    return vetor;
+}
