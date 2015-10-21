@@ -98,4 +98,14 @@ Calcula o angulo entre dois vetores de tamanho n
 */
 double angulo(double* v1, double* v2, int n);
 
+/**
+Verifica se a matriz A é uma matriz de Vandermonde
+*/
+int isVandermonde(double** a, int n);
+
+/**
+Calcula o determinante de uma matriz de Vandermonde
+*/
+double detVandermonde(double** a, int n);
+
 #endif // OPERACOES_H_INCLUDED
