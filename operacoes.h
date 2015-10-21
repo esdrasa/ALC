@@ -108,4 +108,9 @@ Calcula o determinante de uma matriz de Vandermonde
 */
 double detVandermonde(double** a, int n);
 
+/**
+Retorna um vetor com os elementos de uma coluna selecionada em uma matriz
+*/
+double* getColuna(double** matriz, int coluna, int n
+
 #endif // OPERACOES_H_INCLUDED
