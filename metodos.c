@@ -1,4 +1,5 @@
-#include "operacoes.h"
+#include "operacoes.h
+#include <math.h>
 
 double* residuo(double** matriz, double* x, double* b, int n)
 {
