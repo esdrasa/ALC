@@ -289,7 +289,7 @@ double detVandermonde(double** a, int n)
 
     for(j = 0; j < n-1; j++)
         for(i = j+1; i < n; i++)
-            d *= a[j][1] - a[i][1];
+            d *= (a[j][1] - a[i][1]);
 
     return d;
 }
