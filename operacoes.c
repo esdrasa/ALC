@@ -269,3 +269,27 @@ double angulo(double* v1, double* v2, int n)
 
     return t;
 }
+
+int isVandermonde(double** a, int n)
+{
+    int i, j;
+
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++)
+            if(pow(a[i][1], j) != a[i][j])
+                return 0;
+
+    return 1;
+}
+
+double detVandermonde(double** a, int n)
+{
+    int i, j;
+    double d = 1;
+
+    for(j = 0; j < n-1; j++)
+        for(i = j+1; i < n; i++)
+            d *= a[j][1] - a[i][1];
+
+    return d;
+}
