@@ -17,4 +17,42 @@ e retornará 1 não ocorra problemas.
 */
 int lu(double** a, double** l, double** u, int n);
 
+/**
+Aplica o método iterativo de Jacobi para a resolução do sistema Ax = b.
+tolerancia = o erro relativo aceitável entre a resulução de uma iteração anterior e a atual.
+max = número máximo de iterações.
+x = vetor solução alocado antes da chamada à função.
+A função retorna 0 caso não seja possível resolver o sistema, e 1 caso possível.
+*/
+int jacobi(double** A, double* b, double* x, double tolerancia, unsigned long int iMax, int n);
+
+/**
+Aplica o método iterativo de Gauss-Seidel para a resolução do sistema Ax = b.
+tolerancia = o erro relativo aceitável entre a resulução de uma iteração anterior e a atual.
+max = número máximo de iterações.
+x = vetor solução alocado antes da chamada à função.
+A função retorna 0 caso não seja possível resolver o sistema, e 1 caso possível.
+*/
+int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned long int iMax, int n);
+
+/**
+Retorna o valor encontrado se o critério das Linhas da matriz A é válido
+*/
+double criterioLinhas(double** A, int n);
+
+/**
+Retorna o valor encontrado se o critério das Colunas da matriz A é válido
+*/
+double criterioColunas(double** A, int n);
+
+/**
+Retorna o valor encontrado se o critério da Norma é válido para a matriz A
+*/
+double criterioNorma(double** A, int n);
+
+/**
+Retorna o valor encontrado se o critério de Sassenfeld é válido para a matriz A
+*/
+double criterioSassenfeld(double** A, int n);
+
 #endif // METODOS_H_INCLUDED
