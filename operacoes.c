@@ -306,3 +306,27 @@ double* getColuna(double** matriz, int coluna, int n)
 
     return vetor;
 }
+
+double normaInfinito(double* vetor, int n)
+{
+    int i;
+    double maior = fabs(vetor[0]), elemento;
+
+    for(i = 1; i < n; i++)
+    {
+        elemento = fabs(vetor[i]);
+        if(elemento > maior)
+            maior = elemento;
+    }
+
+    return maior;
+}
+
+double erroRelativo(double x1, double x0)
+{
+    double erro;
+
+    erro = fabs(x1 - x0) / fabs(x1);
+
+    return erro;
+}
