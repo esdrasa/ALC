@@ -113,4 +113,15 @@ Retorna um vetor com os elementos de uma coluna selecionada em uma matriz
 */
 double* getColuna(double** matriz, int coluna, int n);
 
+/**
+Calcula a norma infinito de um vetor
+*/
+double normaInfinito(double* vetor, int n);
+
+/**
+Calcula o erro relativo entre dois números reais x1 e x0:
+erro = |x1 - x0| / |x1|
+*/
+double erroRelativo(double x1, double x0);
+
 #endif // OPERACOES_H_INCLUDED
