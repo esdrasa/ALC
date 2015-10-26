@@ -2,12 +2,12 @@
 #define ENTRADA_H_INCLUDED
 
 /**
-Função para ler uma matriz quadrada de tamnho n do arquivo matriz.txt
+Função para ler uma matriz de ordem m x n do arquivo matriz.txt
 */
-double** lerMatriz(int n);
+double** lerMatriz(int m, int n);
 
 /**
-Função para ler um vetor de tamnho n do arquivo vetor.txt
+Função para ler um vetor de tamanho n do arquivo vetor.txt
 */
 double* lerVetor(int n);
 
