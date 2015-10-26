@@ -12,7 +12,7 @@ int main()
     printf("Digite o tamanho da matriz: ");
     scanf("%d%*c", &n);
 
-    A = lerMatriz(n);
+    A = lerMatriz(n, n);
 
     if(teste = isVandermonde(A, n))
         printf("Eh uma matriz de Vandermonde.\n");
