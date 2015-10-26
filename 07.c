@@ -15,7 +15,7 @@ int main()
 
     x = criaVetor(n);
 
-    A = lerMatriz(n);
+    A = lerMatriz(n, n);
 
     b = lerVetor(n);
 
