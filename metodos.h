@@ -55,4 +55,10 @@ Retorna o valor encontrado se o critério de Sassenfeld é válido para a matriz
 */
 double criterioSassenfeld(double** A, int n);
 
+/**
+Calcula o fator de Cholesky R da matriz A. Este fator será utilizado para resolver
+um sistema Ax = b, onde A=R^tR; R^t * y = b; Rx = y
+*/
+int cholesky(double **A, double **R, int n);
+
 #endif // METODOS_H_INCLUDED
