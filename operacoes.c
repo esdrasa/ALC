@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-double** criaMatriz(int n)
+double** criaMatriz(int m, int n)
 {
     double **matriz;
     int i;
 
-    matriz = (double**) malloc(sizeof(double*) * n);
+    matriz = (double**) malloc(sizeof(double*) * m);
 
     for(i = 0; i < n; i++)
         matriz[i] = (double*) malloc(sizeof(double) * n);
@@ -19,7 +19,7 @@ double** criaMatrizI(int n)
     double **matriz;
     int i, j;
 
-    matriz = criaMatriz(n);
+    matriz = criaMatriz(n, n);
 
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
@@ -30,7 +30,7 @@ double** criaMatrizI(int n)
             }
             else
             {
-                    matriz[i][j] = 0;
+                matriz[i][j] = 0;
             }
         }
 
@@ -46,18 +46,18 @@ double* criaVetor(int n)
     return v;
 }
 
-void transpor(double** matriz, int n)
+double** transposta(double** matriz, int m, int n)
 {
     int i, j;
-    double aux;
+    double **matrizT;
 
-    for(i = 0; i < n; i++)
+    matrizT = criaMatriz(n, m);
+
+    for(i = 0; i < m; i++)
         for(j = 0; j < n; j++)
-        {
-            aux = matriz[i][j];
-            matriz[i][j] = matriz[j][i];
-            matriz[j][i] = aux;
-        }
+            matrizT[j][i] = matriz[i][j];
+
+    return matrizT;
 }
 
 double* backSub(double** matriz, double* b, int n)
@@ -96,15 +96,15 @@ double* forwardSub(double** matriz, double* b, int n)
     return x;
 }
 
-double** multiplica(double** a, double** b, int n)
+double** multiplica(double** a, int m, int n, double** b, int p, int q)
 {
     int i, j, k;
     double **result;
 
-    result = criaMatriz(n);
+    result = criaMatriz(m, q);
 
-    for(i = 0; i < n; i++)
-        for(j = 0; j < n; j++)
+    for(i = 0; i < m; i++)
+        for(j = 0; j < q; j++)
         {
             result[i][j] = 0;
             for(k = 0; k < n; k++)
@@ -114,14 +114,14 @@ double** multiplica(double** a, double** b, int n)
     return result;
 }
 
-double* multiplicaVetor(double** a, double* v, int n)
+double* multiplicaVetor(double** a, int m, int n, double* v, int s)
 {
     int i, j;
     double *result;
 
-    result = criaVetor(n);
+    result = criaVetor(m);
 
-    for(i = 0; i < n; i++)
+    for(i = 0; i < m; i++)
     {
         result[i] = 0;
         for(j = 0; j < n; j++)
@@ -173,7 +173,7 @@ double** somaMatrizes(double** a, double** b, int n)
     int i, j;
     double **result;
 
-    result = criaMatriz(n);
+    result = criaMatriz(n, n);
 
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
@@ -187,7 +187,7 @@ double** subtraiMatrizes(double** a, double** b, int n)
     int i, j;
     double **result;
 
-    result = criaMatriz(n);
+    result = criaMatriz(n, n);
 
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
