@@ -15,16 +15,16 @@ int main()
     printf("Digite o tamanho da matriz: ");
     scanf("%d%*c", &n);
 
-    a = lerMatriz(n);
+    a = lerMatriz(n, n);
     b = lerVetor(n);
 
-    u = criaMatriz(n);
+    u = criaMatriz(n, n);
 
     l = criaMatrizI(n);
 
     x = criaVetor(n);
 
-    imprimeMatriz(a, n);
+    imprimeMatriz(a, n, n);
 
     imprimeVetor(b, n);
 
@@ -34,14 +34,14 @@ int main()
 
     x = backSub(u, b2, n);
 
-    imprimeMatriz(u, n);
+    imprimeMatriz(u, n, n);
 
-    imprimeMatriz(l, n);
+    imprimeMatriz(l, n, n);
 
     imprimeVetor(b2, n);
 
     imprimeVetor(x, n);
-	
+
 	getchar();
 
     return 0;
