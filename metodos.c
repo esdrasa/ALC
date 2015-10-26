@@ -1,9 +1,9 @@
-#include "operacoes.h
+#include "operacoes.h"
 #include <math.h>
 
 double* residuo(double** matriz, double* x, double* b, int n)
 {
-    return subtraiVetores(b, multiplicaVetor(matriz, x, n), n);
+    return subtraiVetores(b, multiplicaVetor(matriz, n, n, x, n), n);
 }
 
 int lu(double** a, double** l, double** u, int n)
@@ -234,4 +234,36 @@ double criterioSassenfeld(double** A, int n)
         return 0;
 
     return maior;
+}
+
+int cholesky(double **A, double **R, int n)
+{
+    int i, j, k;
+
+    for(i = 0; i < n; i++)
+    {
+        R[i][i] = 0;
+
+        for(k = 0; k < i; k++)
+            R[i][i] += A[k][i] * A[k][i];
+
+        R[i][i] = A[i][i] - R[i][i];
+
+        if(R[i][i] <= 0)
+            return 0;
+
+        R[i][i] = sqrt(R[i][i]);
+
+        for(j = i+1; j < n; j++)
+        {
+            R[i][j] = 0;
+            for(k = 0; k < i; k++)
+                R[i][j] += R[k][i] * R[k][j];
+
+            R[i][j] = A[i][j] - R[i][j];
+            R[i][j] /= R[i][i];
+        }
+    }
+
+    return 1;
 }
