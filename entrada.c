@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "operacoes.h"
 
-double** lerMatriz(int n)
+double** lerMatriz(int m, int n)
 {
     FILE *fMatriz;
     fMatriz = fopen("matriz.txt", "r");
@@ -10,7 +10,7 @@ double** lerMatriz(int n)
     double **matriz;
     int i, j;
 
-    matriz = criaMatriz(n);
+    matriz = criaMatriz(m, n);
 
     if (fMatriz == NULL)
     {
@@ -18,7 +18,7 @@ double** lerMatriz(int n)
         exit(0);
     }
 
-    for(i = 0; i < n; i++)
+    for(i = 0; i < m; i++)
         for(j = 0; j < n; j++)
             fscanf(fMatriz, "%lf,", &matriz[i][j]);
 
