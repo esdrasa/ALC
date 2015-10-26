@@ -2,9 +2,9 @@
 #define OPERACOES_H_INCLUDED
 
 /**
-Retorna uma matriz quadrada de tamanho n
+Retorna uma matriz quadrada de ordem m x n
 */
-double** criaMatriz(int n);
+double** criaMatriz(int m, int n);
 
 /**
 Retorna uma matriz identidade de tamanho n
@@ -12,9 +12,9 @@ Retorna uma matriz identidade de tamanho n
 double** criaMatrizI(int n);
 
 /**
-Realiza a operação de transposição em uma matriz m de tamanho n
+Retorna a matriz transposta de uma matriz de ordem m x n
 */
-void transpor(double** m, int n);
+double** transposta(double** matriz, int m, int n);
 
 /**
 Retorna um vetor de tamanho n
@@ -37,15 +37,14 @@ double* forwardSub(double** matriz, double* b, int n);
 
 /**
 Retorna a multiplicação entre duas matrizes A e B, onde ab = retorno.
-Ambos de tamanho n.
+A matriz A possuindo ordem m x n, e a matriz B p x q
 */
-double** multiplica(double** a, double** b, int n);
+double** multiplica(double** a, int m, int n, double** b, int p, int q);
 
 /**
-Retorna a multiplicação de um vetor v por uma matriz a.
-Ambos de tamanho n.
+Retorna a multiplicação de um vetor v de dimensão s por uma matriz a de ordem m x n.
 */
-double* multiplicaVetor(double** a, double* v, int n);
+double* multiplicaVetor(double** a, int m, int n, double* v, int s);
 
 /**
 Realiza e retorna o produto escalar entre a e b. <a, b> =  retorno.
