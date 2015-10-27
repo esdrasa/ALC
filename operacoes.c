@@ -8,7 +8,7 @@ double** criaMatriz(int m, int n)
 
     matriz = (double**) malloc(sizeof(double*) * m);
 
-    for(i = 0; i < n; i++)
+    for(i = 0; i < m; i++)
         matriz[i] = (double*) malloc(sizeof(double) * n);
 
     return matriz;
