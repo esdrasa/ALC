@@ -36,6 +36,16 @@ A função retorna 0 caso não seja possível resolver o sistema, e 1 caso poss�
 int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned long int iMax, int n);
 
 /**
+Aplica o SOR (Sucessive Over Relaxation) para a resolução do sistema Ax = b.
+tolerancia = o erro relativo aceitável entre a resulução de uma iteração anterior e a atual.
+max = número máximo de iterações.
+x = vetor solução alocado antes da chamada à função.
+w = termo que acelera a convergência para a solução.
+A função retorna 0 caso não seja possível resolver o sistema, e 1 caso possível.
+*/
+int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned long int iMax, int n);
+
+/**
 Retorna o valor encontrado se o critério das Linhas da matriz A é válido
 */
 double criterioLinhas(double** A, int n);
