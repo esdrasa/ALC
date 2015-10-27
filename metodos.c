@@ -154,6 +154,64 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
     return 1;
 }
 
+int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned long int iMax, int n)
+{
+    int i, j;
+    double erro = tolerancia + 1, *xant, soma;
+    unsigned long int k = 0;
+
+    xant = criaVetor(n);
+
+    for(i = 0; i < n; i++)
+    {
+        /*
+        Se algum elemento da diagonal principal for zero, não haverá solução,
+        a menos que as linha da matriz sejam permutadas.
+        */
+        if(A[i][i] == 0)
+            return 0;
+
+        //primeiro vetor para solução do método iterativo
+        x[i] = b[i] / A[i][i];
+    }
+
+    while(k < iMax && erro >= tolerancia)
+    {
+        if(erro == 0 && tolerancia == 0)
+            return 1;
+
+        erro = 0;
+
+        for(i = 0; i < n; i++)
+            xant[i] = x[i];
+
+        for(i = 0; i < n; i++)
+        {
+            soma = 0;
+
+            for(j = 0; j < n; j++)
+                if(j != i)
+                    soma += A[i][j] * x[j];
+
+            x[i] = ((1 - w) * x[i]) + (w * (b[i] - soma) / A[i][i]);
+
+            if(erroRelativo(x[i], xant[i]) > erro)
+                erro = erroRelativo(x[i], xant[i]);
+        }
+
+        k++;
+    }
+
+    /*
+    Se erro for maior que a tolerancia no final das iterações, significa que
+    não ocorreu convergência para o número máximo de iterações definidas.
+    */
+    if(erro > tolerancia)
+        return 0;
+
+    return 1;
+}
+
 double criterioLinhas(double** A, int n)
 {
     double soma;
@@ -245,7 +303,7 @@ int cholesky(double **A, double **R, int n)
         R[i][i] = 0;
 
         for(k = 0; k < i; k++)
-            R[i][i] += A[k][i] * A[k][i];
+            R[i][i] += R[k][i] * R[k][i];
 
         R[i][i] = A[i][i] - R[i][i];
 
