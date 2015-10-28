@@ -6,7 +6,7 @@
 
 int main()
 {
-    double **A, *b, **R, **Rt, *y, *x1, *x2, tol, w;
+    double **A, *b, **R, **Rt, *y, *x1, *x2, *r1, *r2, tol, w;
     int n, teste, teste2;
     unsigned long int iMax;
 
@@ -66,9 +66,13 @@ int main()
 
     if(teste && teste2)
     {
-        printf("\nDiferenca entre os resultados obtidos com os metodos SOR e Cholesky:\n");
+        r1 = residuo(A, x1, b, n);
+        r2 = residuo(A, x2, b, n);
 
-        imprimeVetor(subtraiVetores(x1, x2, n), n);
+        printf("\nDiferenca entre os resultados obtidos com os metodos SOR e Cholesky:\n");
+        printf("Normas do residuo das solucoes obtidas em cada metodo:\n");
+        printf("Cholesky: %lf\n", normaDois(r1, n));
+        printf("SOR: %lf\n", normaDois(r2, n));
     }
 
     getchar();
