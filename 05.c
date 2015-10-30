@@ -22,17 +22,17 @@ int main()
 
     l = criaMatrizI(n);
 
-    x = criaVetor(n);
-
     imprimeMatriz(a, n, n);
 
     imprimeVetor(b, n);
 
     lu(a, l, u, n);
-
-    b2 = forwardSub(l, b, n);
-
-    x = backSub(u, b2, n);
+    
+    b2 = criaVetor(n);
+    forwardSub(l, b, b2, n);
+    
+    x = criaVetor(n);
+    backSub(u, b2, x, n);
 
     imprimeMatriz(u, n, n);
 
@@ -42,7 +42,7 @@ int main()
 
     imprimeVetor(x, n);
 
-	getchar();
+    getchar();
 
     return 0;
 }
