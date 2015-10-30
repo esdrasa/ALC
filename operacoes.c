@@ -281,3 +281,18 @@ double erroRelativo(double x1, double x0)
 
     return erro;
 }
+
+void liberaMatriz(double** a, int nLinhas)
+{
+    int i;
+    
+    for(i = 0; i < nLinhas; i++)
+	free(a[i]);
+    
+    free(a);
+}
+
+void liberaVetor(double* a)
+{
+    free(a);
+}
