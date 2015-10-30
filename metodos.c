@@ -1,9 +1,13 @@
 #include "operacoes.h"
 #include <math.h>
 
-double* residuo(double** matriz, double* x, double* b, int n)
+void residuo(double** matriz, double* x, double* b, double* r, int n)
 {
-    return subtraiVetores(b, multiplicaVetor(matriz, n, n, x, n), n);
+    double* Ax = criaVetor(n);
+    
+    multiplicaVetor(matriz, n, n, x, Ax, n);
+    
+    subtraiVetores(b, Ax , r, n);
 }
 
 int lu(double** a, double** l, double** u, int n)
