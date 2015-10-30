@@ -20,7 +20,7 @@ double** lerMatriz(int m, int n)
 
     for(i = 0; i < m; i++)
         for(j = 0; j < n; j++)
-            fscanf(fMatriz, "%lf,", &matriz[i][j]);
+            fscanf(fMatriz, "%lf", &matriz[i][j]);
 
     fclose(fMatriz);
 
@@ -44,7 +44,7 @@ double* lerVetor(int n)
     }
 
     for(i = 0; i < n; i++)
-        fscanf(fVetor, "%lf,", &vetor[i]);
+        fscanf(fVetor, "%lf", &vetor[i]);
 
     fclose(fVetor);
 
