@@ -13,6 +13,7 @@ int main()
     scanf("%d%*c", &n);
 
     A = lerMatriz(n, n);
+    coluna = lerVetor(n);
 
     if(teste = isVandermonde(A, n))
         printf("Eh uma matriz de Vandermonde.\n");
@@ -23,7 +24,7 @@ int main()
     printf("Norma Linha: %lf\n", normaLinha(A, n));
     printf("Norma Coluna: %lf\n", normaColuna(A, n));
 
-    coluna = getColuna(A, 1, n);
+    getColuna(A, coluna, 1, n);
 
     produtoI = produtoEscalar(A[0], coluna, n);
 
