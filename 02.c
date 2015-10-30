@@ -1,81 +1,85 @@
 #include <stdio.h>
+#include "entrada.h"
+#include "saida.h"
 #include "operacoes.h"
 #include "metodos.h"
-#include "saida.h"
-#include "entrada.h"
 
-int main()
-{
-    double **A, *b, **R, **Rt, *y, *x1, *x2, *r1, *r2, tol, w;
-    int n, teste, teste2;
-    unsigned long int iMax;
+/*Resolver problemas de minimos quadrados usando A'Ax = A'b, onde A' seria A transposto*/
 
-    printf("Digite o tamanho da matriz: ");
-    scanf("%d%*c", &n);
+int main(void) {
 
-    A = lerMatriz(n, n);
+    double **matriz, *vetorB, *vetorB2, **matrizTrans, **matrizMultA, *matrizMultB, *vetorX, **matrizL, **matrizU;
 
-    b = lerVetor(n);
+    int n, m;
 
-    R = criaMatriz(n, n);
+    printf("Digite a quantidade de linha(s): ");
+    scanf("%d%*c",&n);
 
-    teste = cholesky(A, R, n);
+    printf("Digite a quantidade de coluna(s): ");
+    scanf("%d%*c",&m);
 
-    if(!teste)
-    {
-        printf("Nao foi possivel determinar o fator de Cholesky\n");
-    }
-    else
-    {
-        printf("Fator de Cholesky encontrado:\n");
-        imprimeMatriz(R, n, n);
+    matriz = lerMatriz(n, m);
+    vetorB = lerVetor(n);
 
-        Rt = transposta(R, n, n);
+    matrizL = criaMatrizI(n);
+    matrizU = criaMatriz(n, n);
 
-        y = forwardSub(Rt, b, n);
+    vetorX = criaVetor(n);
 
-        x1 = backSub(R, y, n);
+    printf("\nResolvendo problemas de minimos quadrados da seguinte maneira:\n");
+    printf("A'Ax = A'b.\n");
+    printf("Obs: A' = A(transposto).\n");
+    
+    matrizTrans = criaMatriz(m, n);
+    transposta(matriz, matrizTrans, n, m); // Transpor a matriz A
+    
+    matrizMultA = criaMatriz(m, m);
+    multiplica(matrizTrans, m, n, matriz, n, m, matrizMultA); // Multiplica a matriz A' por A.
+    
+    matrizMultB = criaVetor(m);
+    multiplicaVetor(matrizTrans, m, n, vetorB, matrizMultB, m); // Multiplica a matriz A' pelo vetor B
 
-        printf("Solucao do sistema obtida com o fator de Cholesky:\n");
+    /*Nessa etapa já tem o novo sistema Ax=b*/
 
-        imprimeVetor(x1, n);
-    }
+    printf("\nMatriz A'A:\n");
+    imprimeMatriz(matrizMultA, m, m); //Imprime o que para nós será a matriz A a partir de agora
 
-    printf("Resolucao do sistema com o metodo SOR:\n");
+    printf("\nVetor A'B.\n");
+    imprimeVetor(matrizMultB, m); // Imprime o que para nós será o vetor B a partir de agora
 
-    printf("\nDigite a tolerancia para o erro relativo: ");
-    scanf("%lf%*c", &tol);
+    /*Agora só resta resolver o novo sistema*/
 
-    printf("Digite um valor para w entre 0 e 2: ");
-    scanf("%lf%*c", &w);
+    printf("Utilizando o metodo LU.\n");
 
-    printf("Digite o numero maximo de iteracoes permitidas: ");
-    scanf("%lu%*c", &iMax);
+    
+    lu(matrizMultA, matrizL, matrizU, m);
 
-    x2 = criaVetor(n);
+    printf("\nMatriz L:\n");
+    imprimeMatriz(matrizL, m, m);
 
-    if(teste2 = SOR(A, b, x2, tol, w, iMax, n))
-    {
-        printf("\nSolucao do sistema com o metodo SOR:\n");
-        imprimeVetor(x2, n);
-    }
-    else
-    {
-        printf("\nNao foi possivel resolver o sistema pelo metodo SOR.\n");
-    }
+    printf("\nMatriz U:\n");
+    imprimeMatriz(matrizU, m, m);
 
-    if(teste && teste2)
-    {
-        r1 = residuo(A, x1, b, n);
-        r2 = residuo(A, x2, b, n);
+    //Explicação do método
+    printf("Ax = b\n");
+    printf("A = LU\n");
+    printf("LUx = b\n");
+    printf("Ux = y\n");
+    printf("Ly = b    (resolucao por substituicao para frente).\n");
+    printf("Ux = y    (resolucao por substituicao para tras).\n");
 
-        printf("\nDiferenca entre os resultados obtidos com os metodos SOR e Cholesky:\n");
-        printf("Normas do residuo das solucoes obtidas em cada metodo:\n");
-        printf("Cholesky: %lf\n", normaDois(r1, n));
-        printf("SOR: %lf\n", normaDois(r2, n));
-    }
+    vetorB2 = criaVetor(m);
+    forwardSub(matrizL, matrizMultB, vetorB2, m);
+    
+    vetorX = criaVetor(m);
+    backSub(matrizU, vetorB2, vetorX, m);
 
+    printf("\nObtido o vetor solucao.\n");
+
+    printf("\nVetor solucao:\n");
+    imprimeVetor(vetorX, m);
+    
     getchar();
-
+   
     return 0;
 }
