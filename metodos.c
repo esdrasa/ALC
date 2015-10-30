@@ -8,6 +8,8 @@ void residuo(double** matriz, double* x, double* b, double* r, int n)
     multiplicaVetor(matriz, n, n, x, Ax, n);
     
     subtraiVetores(b, Ax , r, n);
+    
+    liberaVetor(Ax);
 }
 
 int lu(double** a, double** l, double** u, int n)
