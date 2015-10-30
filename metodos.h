@@ -71,4 +71,11 @@ um sistema Ax = b, onde A=R^tR; R^t * y = b; Rx = y
 */
 int cholesky(double **A, double **R, int n);
 
+/**
+ * Método do Gradiente Conjugado para calcular a solução do sistema Ax = b.
+ * tol = erro relativo aceitável entre a resolução de uma iteração anterior e a atual.
+ * iMax = número máximo de iterações.
+ */
+int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned long int iMax, int n);
+
 #endif // METODOS_H_INCLUDED
