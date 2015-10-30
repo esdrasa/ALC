@@ -2,11 +2,11 @@
 #define METODOS_H_INCLUDED
 
 /**
-Calcula e retorna o resíduo da solução de um sistema linear.
+Calcula o resíduo (r) da solução de um sistema linear.
 Um sistema linear Ax = b, onde A é a matriz e x a solução encontrada.
 O cálculo do resíduo será: r = b - Ax
 */
-double* residuo(double** matriz, double* x, double* b, int n);
+void residuo(double** matriz, double* x, double* b, double* r, int n);
 
 /**
 Realiza a fatoração LU na matriz A de tamanho n.
