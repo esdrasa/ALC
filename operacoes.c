@@ -46,26 +46,18 @@ double* criaVetor(int n)
     return v;
 }
 
-double** transposta(double** matriz, int m, int n)
+void transposta(double** matriz, double** t, int m, int n)
 {
     int i, j;
-    double **matrizT;
-
-    matrizT = criaMatriz(n, m);
 
     for(i = 0; i < m; i++)
         for(j = 0; j < n; j++)
-            matrizT[j][i] = matriz[i][j];
-
-    return matrizT;
+            t[j][i] = matriz[i][j];
 }
 
-double* backSub(double** matriz, double* b, int n)
+void backSub(double** matriz, double* b, double* x, int n)
 {
-    double *x;
     int i, j;
-
-    x = criaVetor(n);
 
     for(i = n - 1; i >= 0; i--)
     {
@@ -74,16 +66,11 @@ double* backSub(double** matriz, double* b, int n)
             x[i] -= matriz[i][j] * x[j];
         x[i] /= matriz[i][i];
     }
-
-    return x;
 }
 
-double* forwardSub(double** matriz, double* b, int n)
+void forwardSub(double** matriz, double* b, double* x, int n)
 {
-    double *x;
     int i, j;
-
-    x = criaVetor(n);
 
     for(i = 0; i < n; i++)
     {
@@ -92,16 +79,11 @@ double* forwardSub(double** matriz, double* b, int n)
             x[i] -= matriz[i][j] * x[j];
         x[i] /= matriz[i][i];
     }
-
-    return x;
 }
 
-double** multiplica(double** a, int m, int n, double** b, int p, int q)
+void multiplica(double** a, int m, int n, double** b, int p, int q, double** result)
 {
     int i, j, k;
-    double **result;
-
-    result = criaMatriz(m, q);
 
     for(i = 0; i < m; i++)
         for(j = 0; j < q; j++)
@@ -110,16 +92,11 @@ double** multiplica(double** a, int m, int n, double** b, int p, int q)
             for(k = 0; k < n; k++)
                 result[i][j] += a[i][k] * b[k][j];
         }
-
-    return result;
 }
 
-double* multiplicaVetor(double** a, int m, int n, double* v, int s)
+void multiplicaVetor(double** a, int m, int n, double* v, double* result, int s)
 {
     int i, j;
-    double *result;
-
-    result = criaVetor(m);
 
     for(i = 0; i < m; i++)
     {
@@ -128,7 +105,6 @@ double* multiplicaVetor(double** a, int m, int n, double* v, int s)
             result[i] += a[i][j] * v[j];
     }
 
-    return result;
 }
 
 double produtoEscalar(double* a, double* b, int n)
@@ -142,58 +118,38 @@ double produtoEscalar(double* a, double* b, int n)
     return produto;
 }
 
-double* subtraiVetores(double* a, double* b, int n)
+void subtraiVetores(double* a, double* b, double* result, int n)
 {
     int i;
-    double *result;
-
-    result = criaVetor(n);
 
     for(i = 0; i < n; i++)
         result[i] = a[i] - b[i];
-
-    return result;
 }
 
-double* somaVetores(double* a, double* b, int n)
+void somaVetores(double* a, double* b, double* result, int n)
 {
     int i;
-    double *result;
-
-    result = criaVetor(n);
 
     for(i = 0; i < n; i++)
         result[i] = a[i] + b[i];
-
-    return result;
 }
 
-double** somaMatrizes(double** a, double** b, int n)
+void somaMatrizes(double** a, double** b, double** result, int n)
 {
     int i, j;
-    double **result;
-
-    result = criaMatriz(n, n);
 
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
             result[i][j] = a[i][j] + b[i][j];
-
-    return result;
 }
 
-double** subtraiMatrizes(double** a, double** b, int n)
+void subtraiMatrizes(double** a, double** b, double** result, int n)
 {
     int i, j;
-    double **result;
-
-    result = criaMatriz(n, n);
 
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
             result[i][j] = a[i][j] - b[i][j];
-
-    return result;
 }
 
 double normaF(double** matriz, int n)
@@ -294,17 +250,12 @@ double detVandermonde(double** a, int n)
     return d;
 }
 
-double* getColuna(double** matriz, int coluna, int n)
+void getColuna(double** matriz, double* vColuna, int coluna, int n)
 {
-    double* vetor;
     int i;
 
-    vetor = criaVetor(n);
-
     for(i = 0; i < n; i++)
-        vetor[i] = matriz[i][coluna];
-
-    return vetor;
+        vColuna[i] = matriz[i][coluna];
 }
 
 double normaInfinito(double* vetor, int n)
