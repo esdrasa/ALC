@@ -96,7 +96,7 @@ int jacobi(double** A, double* b, double* x, double tolerancia, unsigned long in
     Se erro for maior que a tolerancia no final das iterações, significa que
     não ocorreu convergência para o número máximo de iterações definidas.
     */
-    if(erro > tolerancia)
+    if(erro >= tolerancia)
         return 0;
 
     return 1;
@@ -154,7 +154,7 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
     Se erro for maior que a tolerancia no final das iterações, significa que
     não ocorreu convergência para o número máximo de iterações definidas.
     */
-    if(erro > tolerancia)
+    if(erro >= tolerancia)
         return 0;
 
     return 1;
@@ -212,7 +212,7 @@ int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned 
     Se erro for maior que a tolerancia no final das iterações, significa que
     não ocorreu convergência para o número máximo de iterações definidas.
     */
-    if(erro > tolerancia)
+    if(erro >= tolerancia)
         return 0;
 
     return 1;
@@ -329,5 +329,58 @@ int cholesky(double **A, double **R, int n)
         }
     }
 
+    return 1;
+}
+
+int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned long int iMax, int n)
+{
+    double *x0, *r, *d, *c, erro = tol + 1, q, p;
+    int i;
+    unsigned long int k = 0;
+    
+    x0 = criaVetor(n);
+    r = criaVetor(n);
+    d = criaVetor(n);
+    c = criaVetor(n);
+    
+    for(i = 0; i < n; i++)
+	x[i] = b[i] / A[i][i];
+    
+    multiplicaVetor(A, n, n, x, r, n); // r =  Ax
+    subtraiVetores(r, b, r, n); //r = Ax - b
+    
+    for(i = 0; i < n; i++)
+	d[i] = r[i];
+    
+    while(erro >= tol && k < iMax)
+    {
+	if(erro == 0 && tol == 0)
+	    return 1;
+	
+	multiplicaVetor(A, n, n, d, c, n); // c = Ad
+	q = (produtoEscalar(r, d, n) * (-1)) / produtoEscalar(d, c, n); // q = -<r, d> / <d, Ad>
+	
+	for(i = 0; i < n; i++){ // x = x0 + q*d
+	    x0[i] = x[i];
+	    x[i] = x0[i] + q*d[i];
+	}
+	
+	multiplicaVetor(A, n, n, x, r, n); // r =  Ax
+	subtraiVetores(r, b, r, n); //r = Ax - b
+	
+	p = (produtoEscalar(r, c, n) * (-1)) / produtoEscalar(d, c, n); // p = -<r, Ad> / <d, Ad>
+	
+	for(i = 0; i < n; i++) // d = r + p*d
+	    d[i] = r[i] + p*d[i];
+	
+	subtraiVetores(x, x0, x0, n); // x0 = x - x0
+	erro = normaDois(x0, n) / normaDois(x, n); // erro = |x - x0| / |x| 
+	
+	k++;
+    }
+    
+    if(erro >= tol)
+	return 0;
+    
     return 1;
 }
