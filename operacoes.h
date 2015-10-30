@@ -128,4 +128,14 @@ erro = |x1 - x0| / |x1|
 */
 double erroRelativo(double x1, double x0);
 
+/**
+ * Libera o espaço alocado para um ponteiro de ponteiro na memória
+ */
+void liberaMatriz(double** a, int nLinhas);
+
+/**
+ * Libera o espaço alocado para um ponteiro na memória
+ */
+void liberaVetor(double* a);
+
 #endif // OPERACOES_H_INCLUDED
