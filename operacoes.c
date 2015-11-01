@@ -296,3 +296,24 @@ void liberaVetor(double* a)
 {
     free(a);
 }
+
+void derivada(double* y, double* d, int n)
+{
+    int i;
+    
+    for(i = 0; i < n; i++)
+	d[i] = y[i] * (n-i);
+}
+
+double ordenada(double* polinomio, double abscissa, int n)
+{
+    int i;
+    double y = 0;
+    
+    for(i = 0; i < n; i++)
+	y += polinomio[i] * pow(abscissa, n-i);
+    
+    y += polinomio[n];
+    
+    return y;
+}
