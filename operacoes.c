@@ -333,3 +333,15 @@ void encontraGraus(double **matrizA, int n, int m, double **matrizD)
         }
     }
 }
+
+void **matrizNula(double **matriz, int n, int m)
+{
+    int i,j;
+    for(i=0; i<n; i++)
+    {
+        for(j=0; j<m; j++)
+        {
+            matriz[i][j] = 0;
+        }
+    }
+}
