@@ -148,4 +148,10 @@ void derivada(double* y, double* d, int n);
  */
 double ordenada(double* polinomio, double abscissa, int n);
 
+/**
+Encontra o grau de cada vértice em uma matriz de adjacência.
+*/
+void encontraGraus(double **matrizA, int n, int m, double **matrizD);
+
+
 #endif // OPERACOES_H_INCLUDED
