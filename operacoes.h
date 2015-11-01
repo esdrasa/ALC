@@ -138,4 +138,14 @@ void liberaMatriz(double** a, int nLinhas);
  */
 void liberaVetor(double* a);
 
+/**
+ * Calcula a derivada d do polinômio y.
+ */
+void derivada(double* y, double* d, int n);
+
+/**
+ * Retorna o valor do polinomio P(x) quando x = abscissa.
+ */
+double ordenada(double* polinomio, double abscissa, int n);
+
 #endif // OPERACOES_H_INCLUDED
