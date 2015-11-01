@@ -384,3 +384,40 @@ int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned lo
     
     return 1;
 }
+
+int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int iMax, int n)
+{
+    int i = 0;
+    double x0, x1, *deriv, erro = tolerancia + 1;
+    unsigned long int k = 0;
+    
+    deriv = criaVetor(n-1);
+    
+    x0 = 1;
+    
+    derivada(polinomio, deriv, n);
+    
+    while(erro > tolerancia && k < iMax)
+    {
+	double p, d;
+	
+	p = ordenada(polinomio, x0, n);
+	    
+	d = ordenada(deriv, x0, n-1);
+	    
+	x1 = x0 - (p / d);
+	    
+	erro = erroRelativo(x1, x0);
+	    
+	x0 = x1;
+	
+	k++;
+    }
+    
+    if(k >= iMax)
+	return 0;
+    
+    *raiz = x1;
+    
+    return 1; 
+}
