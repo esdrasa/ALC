@@ -78,4 +78,9 @@ int cholesky(double **A, double **R, int n);
  */
 int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned long int iMax, int n);
 
+/**
+ * Calcula uma raíz de um polinômio, se houver.
+ */
+int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int iMax, int n);
+
 #endif // METODOS_H_INCLUDED
