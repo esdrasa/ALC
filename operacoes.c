@@ -317,3 +317,19 @@ double ordenada(double* polinomio, double abscissa, int n)
     
     return y;
 }
+
+void encontraGraus(double **matrizA, int n, int m, double **matrizD)
+{
+    int i, j;
+
+    for(i=0; i<n; i++)
+    {
+        for(j=0; j<m; j++)
+        {
+            if(matrizA[i][j] > 0)
+            {
+                matrizD[i][i]++;
+            }
+        }
+    }
+}
