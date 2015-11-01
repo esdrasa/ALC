@@ -98,6 +98,10 @@ int jacobi(double** A, double* b, double* x, double tolerancia, unsigned long in
     */
     if(erro >= tolerancia)
         return 0;
+    
+    for(i = 0; i < n; i++)
+	    if(isnan(x[i]) || isinf(x[i]))
+	        return 0;
 
     return 1;
 }
@@ -156,6 +160,10 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
     */
     if(erro >= tolerancia)
         return 0;
+        
+    for(i = 0; i < n; i++)
+	    if(isnan(x[i]) || isinf(x[i]))
+	        return 0;
 
     return 1;
 }
@@ -214,6 +222,10 @@ int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned 
     */
     if(erro >= tolerancia)
         return 0;
+        
+    for(i = 0; i < n; i++)
+	    if(isnan(x[i]) || isinf(x[i]))
+	        return 0;
 
     return 1;
 }
