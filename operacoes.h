@@ -148,7 +148,8 @@ void derivada(double* y, double* d, int n);
  */
 double ordenada(double* polinomio, double abscissa, int n);
 
-/** Preenche com zeros uma matriz qualquer.
+/** 
+Preenche com zeros uma matriz qualquer.
 */
 void **matrizNula(double **matriz, int n, int m);
 
@@ -157,5 +158,9 @@ Encontra o grau de cada vértice em uma matriz de adjacência.
 */
 void encontraGraus(double **matrizA, int n, int m, double **matrizD);
 
+/**
+Encontra o determinante de uma matriz identidade.
+*/
+double determinanteI(double **matrizI, int n);
 
 #endif // OPERACOES_H_INCLUDED
