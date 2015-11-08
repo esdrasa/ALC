@@ -345,3 +345,22 @@ void **matrizNula(double **matriz, int n, int m)
         }
     }
 }
+
+double determinanteI(double **matrizI, int n)
+{
+    double resultado = 1;
+    int i,j;
+
+    for(i=0; i<n; i++)
+    {
+        for(j=0; j<n; j++)
+        {
+            if(i==j)
+            {
+                resultado *= matrizI[i][j];
+            }
+        }
+    }
+
+    return resultado;
+}
