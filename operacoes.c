@@ -220,7 +220,12 @@ double normaDois(double* vetor, int n)
 double angulo(double* v1, double* v2, int n)
 {
     double t;
-
+    
+    /* Para determinar o ângulo entre dois vetores v1 e v2, os seguintes cálculos são realizados:
+     * cos(x) = <v1, v2> / |v1|*|v2|
+     * angulo = acos(<v1, v2> / |v1|*|v2|)
+     */
+    
     t = acos(produtoEscalar(v1, v2, n) / (normaDois(v1, n) * normaDois(v2, n)));
 
     return t;
@@ -230,6 +235,12 @@ int isVandermonde(double** a, int n)
 {
     int i, j;
 
+    /*
+     * Os loops abaixo verificam a condição necessária para que uma matriz seja de Vandermonde:
+     * a[i][1]^j == a[i][j]
+     * Se o segundo elemento de cada linha elevado à j-ésima potência for diferente do elemento da
+     * coluna j dessa mesma linha, a condição não será satisfeita e a função retornará zero.
+     */
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
             if(pow(a[i][1], j) != a[i][j])
@@ -242,7 +253,11 @@ double detVandermonde(double** a, int n)
 {
     int i, j;
     double d = 1;
-
+    
+    /*
+     * O determinante de uma matriz de Vandermonde é o produtório de (a[j][1] - a[i][1]), tal que 0 <= j < i < n
+     */
+    
     for(j = 0; j < n-1; j++)
         for(i = j+1; i < n; i++)
             d *= (a[j][1] - a[i][1]);
@@ -322,45 +337,30 @@ void encontraGraus(double **matrizA, int n, int m, double **matrizD)
 {
     int i, j;
 
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<m; j++)
-        {
-            if(matrizA[i][j] > 0)
-            {
+    for(i = 0; i < n; i++)
+        for(j = 0; j < m; j++)
+            if(matrizA[i][j] != 0)
                 matrizD[i][i]++;
-            }
-        }
-    }
 }
 
-void **matrizNula(double **matriz, int n, int m)
+void matrizNula(double **matriz, int n, int m)
 {
     int i,j;
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<m; j++)
-        {
+    
+    for(i = 0; i < n; i++)
+        for(j = 0; j < m; j++)
             matriz[i][j] = 0;
-        }
-    }
 }
 
 double determinanteI(double **matrizI, int n)
 {
     double resultado = 1;
-    int i,j;
+    int i, j;
 
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<n; j++)
-        {
-            if(i==j)
-            {
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++)
+            if(i == j)
                 resultado *= matrizI[i][j];
-            }
-        }
-    }
 
     return resultado;
 }
