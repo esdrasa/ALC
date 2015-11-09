@@ -83,12 +83,16 @@ Calcula a norma de Frobenius de uma matriz de tamanho n
 double normaF(double** matriz, int n);
 
 /**
-Calcula a norma linha (infinita) de uma matriz de tamanho n
+Calcula a norma linha (infinita) de uma matriz de tamanho n.
+A norma linha é o maior número no conjunto das somas dos valores absolutos
+dos elementos de cada linha.
 */
 double normaLinha(double** matriz, int n);
 
 /**
-Calcula a norma coluna (norma 1) de uma matriz de tamanho n
+Calcula a norma coluna (norma 1) de uma matriz de tamanho n.
+A norma coluna é o maior número no conjunto das somas dos valores absolutos
+dos elementos de cada coluna.
 */
 double normaColuna(double** matriz, int n);
 
@@ -118,7 +122,7 @@ Transforma vColuna em um vetor com os elementos de uma coluna selecionada em uma
 void getColuna(double** matriz, double* vColuna, int coluna, int n);
 
 /**
-Calcula a norma infinito de um vetor
+Calcula a norma infinito de um vetor (maior valor desse vetor)
 */
 double normaInfinito(double* vetor, int n);
 
