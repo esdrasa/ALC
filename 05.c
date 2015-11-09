@@ -4,14 +4,11 @@
 #include "saida.h"
 #include "entrada.h"
 
-/*
-Questão 05 não completa
-*/
 int main()
 {
-    double **a, *b, **l, **u, *x, *x2, *b2, *r1, *r2, tol = 0.000001;
+    double **a, *b, **l, **u, *x, *x2, *b2, *r1, *r2, tol = 0.0001;
     int n;
-    unsigned long int erro = 10000;
+    unsigned long int erro = 1000000;
 
     printf("Digite o tamanho da matriz: ");
     scanf("%d%*c", &n);
@@ -22,7 +19,19 @@ int main()
     u = criaMatriz(n, n);
 
     l = criaMatrizI(n);
-
+    
+    /*
+     * Dado um sitema A*x = b, teremos L*U*x = b
+     * 
+     * U*x = b2
+     * 
+     * L*b2 = b (b2 é resolvido com substituição para frente)
+     * 
+     * Após descobrir b2, se resolverá x:
+     * U*x = b2 (aplica-se substituição para trás e x será resolvido)
+    */
+    
+    //O método abaixo calcula as matrizes "l" e "u" à partir da matriz "a"
     lu(a, l, u, n);
     
     b2 = criaVetor(n);
