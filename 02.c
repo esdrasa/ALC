@@ -18,7 +18,8 @@ int main()
     b = lerVetor(n);
 
     R = criaMatriz(n, n);
-
+    
+    //Se a matriz A for definida positiva e simétrica, a matriz R (fator de Cholesky) será calculada.
     teste = cholesky(A, R, n);
 
     if(!teste)
@@ -29,6 +30,17 @@ int main()
     {
         printf("Fator de Cholesky encontrado:\n");
         imprimeMatriz(R, n, n);
+	
+	/*
+	 * Rt = matriz transposta de R.
+	 * temos A e b em um sistema A*x = b, e queremos determinar x
+	 * A = Rt*R
+	 * Rt*R*x = b
+	 * R*x = y
+	 * Rt*y = b (y será resolvido com substituição para frente, pois Rt é triangular inferior).
+	 * Ao descobrir os valores de y, podemos achar os valores de x, pois
+	 * R*x = y (x será resolvido com substituição para trás, pois R é triangular superior).
+	*/
 	
 	Rt = criaMatriz(n, n);
         transposta(R, Rt, n, n);
@@ -66,7 +78,8 @@ int main()
     {
         printf("\nNao foi possivel resolver o sistema pelo metodo SOR.\n");
     }
-
+    
+    //Compara a norma do resíduo das soluções obtidas com os métodos SOR e Cholesky, caso ambos sejam tenham convergido
     if(teste && teste2)
     {
 	r1 = criaVetor(n);
