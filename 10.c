@@ -7,7 +7,7 @@
 
 int main()
 {
-  double **A, **At, **AAt, **X, **Y, cofB, cofC, delta, rDelta, r1, r2, **U, **S, **V, **Vt, *u1, *u2;
+  double **A, **At, **AAt, **X, **Y, cofB, cofC, delta, rDelta, r1, r2, **U, **S, **V, **Vt, *u1, *u2, *v1, *v2, *v3;
   int n, i, j, k;
   printf("Decomposicao SVD para matrizes 2xn\n");
   printf("Digite o numero de colunas: ");
@@ -22,8 +22,11 @@ int main()
   Y = criaMatriz(2, 2);
   V = criaMatriz(n, n);
   Vt = criaMatriz(n, n);
-  u1 = criaVetor(n);
-  u2 = criaVetor(n);
+  u1 = criaVetor(2);
+  u2 = criaVetor(2);
+  v1 = criaVetor(n);
+  v2 = criaVetor(n);
+  v3 = criaVetor(n);
   
   matrizNula(S, 2, n);
   transposta(A, At, 2, n);
@@ -106,6 +109,7 @@ int main()
   U[1][0] = u2[1];
   U[1][1] = u1[1];
 
+  matrizNula(V, 2, 2);
 
   printf("Matriz X:\n");
   imprimeMatriz(X, 2, 2);
@@ -119,12 +123,16 @@ int main()
   printf("vetor Y:\n");
   imprimeVetor(u2, 2);
 
+  printf("Matriz ortogonal U:\n");
+  imprimeMatriz(U, 2, 2);
 
   printf("Matriz diagonal S:\n");
   imprimeMatriz(S, 2, n);
 // falta a ortogonalização
-  printf("Matriz ortogonal U:\n");
-  imprimeMatriz(U, 2, 2);
+
+  printf("Matriz ortogonal V:\n");
+  imprimeMatriz(V, n, n);
+
 
   getchar();
   return 0;
