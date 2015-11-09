@@ -1,5 +1,13 @@
 #include "operacoes.h"
 #include <math.h>
+#include <float.h>
+
+/*
+ * Em métodos iterativos, quando a tolerancia passada como parâmetro for igual 0 será utilizada
+ * a constante DBL_EPSILON, da biblioteca float.h, no lugar de zero, pois DBL_EPSILON é a menor
+ * diferença possível, na linguagem em uso, entre 1 e o menor valor maior que 1.
+*/
+
 
 void residuo(double** matriz, double* x, double* b, double* r, int n)
 {
@@ -27,12 +35,30 @@ int lu(double** a, double** l, double** u, int n)
     {
         if(u[k-1][k-1] == 0)
             return 0;
+	
+	/*k será igual a quantidade de equações já escalonadas. Assim, a linha linha k deverá ser escalonada
+	nos próximos loops, pois a linhas i = 0...k-1 já estarão escalonadas e o objetivo é escalonar todas as linhas.
+	*/
         for(i = k; i < n; i++)
         {
+	    /*l[i][k-1] será o coeficiente utilizado para zerar cada elemento abaixo do elemento u[k-1][k-1] da
+	    diagonal principal. Sendo u[k-1][k-1] o primeiro coeficente diferente de zero da equação já escalonada;
+	    e u[i][k-1] o coeficiente a ser zerado na equação (linha) i.
+	    */
             l[i][k-1] = u[i][k-1] / u[k-1][k-1];
 
+	    /*
+	    Para zerar os coeficientes abaixo do elemento u[k-1][k-1], multiplica-se o coeficiente l
+	    descoberto acima por cada coeficiente da última equação já escalonada, e subtrai-se cada
+	    multiplicação obtida anteriormente ao correspondente coeficiente das equações abaixo da linha k-1.
+	    */
             for(j = k-1; j < n; j++)
             {
+		/*
+		 Lembrando que quando j = k-1, u[i][k-1] = u[i][k-1] - l[i][k-1]*u[k-1][k-1]. Mas
+		 l[i][k-1] = u[i][k-1] / u[k-1][k-1]. Então: u[i][k-1] = u[i][k-1] - (u[i][k-1] / u[k-1][k-1]) * u[k-1][k-1].
+		 Mas, (u[i][k-1] / u[k-1][k-1]) * u[k-1][k-1] = u[i][k-1]. Logo, u[i][k-1] será igual a zero, que é o objetivo.
+		*/
                 u[i][j] = u[i][j] - l[i][k-1]*u[k-1][j];
             }
         }
@@ -49,6 +75,9 @@ int jacobi(double** A, double* b, double* x, double tolerancia, unsigned long in
     int i, j;
     double erro = tolerancia + 1, *xant, soma;
     unsigned long int k = 0;
+    
+    if(tolerancia == 0)
+	tolerancia = DBL_EPSILON;
 
     xant = criaVetor(n);
 
@@ -67,9 +96,6 @@ int jacobi(double** A, double* b, double* x, double tolerancia, unsigned long in
 
     while(k < iMax && erro >= tolerancia)
     {
-        if(erro == 0 && tolerancia == 0)
-            return 1;
-
         erro = 0;
 
         for(i = 0; i < n; i++)
@@ -111,6 +137,9 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
     int i, j;
     double erro = tolerancia + 1, *xant, soma;
     unsigned long int k = 0;
+    
+    if(tolerancia == 0)
+	tolerancia = DBL_EPSILON;
 
     xant = criaVetor(n);
 
@@ -118,7 +147,7 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
     {
         /*
         Se algum elemento da diagonal principal for zero, não haverá solução,
-        a menos que as linha da matriz sejam permutadas.
+        a menos que as linhas da matriz sejam permutadas.
         */
         if(A[i][i] == 0)
             return 0;
@@ -129,8 +158,6 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
 
     while(k < iMax && erro >= tolerancia)
     {
-        if(erro == 0 && tolerancia == 0)
-            return 1;
 
         erro = 0;
 
@@ -173,6 +200,9 @@ int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned 
     int i, j;
     double erro = tolerancia + 1, *xant, soma;
     unsigned long int k = 0;
+    
+    if(tolerancia == 0)
+	tolerancia = DBL_EPSILON;
 
     xant = criaVetor(n);
 
@@ -191,8 +221,6 @@ int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned 
 
     while(k < iMax && erro >= tolerancia)
     {
-        if(erro == 0 && tolerancia == 0)
-            return 1;
 
         erro = 0;
 
@@ -234,6 +262,12 @@ double criterioLinhas(double** A, int n)
 {
     double soma;
     int i, j;
+    
+    /*
+     * Para que o critério das linhas seja satisfeito, o valor absoluto do elemento de uma linha i
+     * pertencente à diagonal principal deve ser maior do que a soma dos valores absolutos de cada
+     * elemento dessa mesma linha.
+    */
 
     for(i = 0; i < n; i++)
     {
@@ -253,6 +287,11 @@ double criterioColunas(double** A, int n)
 {
     double soma;
     int i, j;
+    
+    /*
+     * Para que o critério das colunas seja satisfeito, a soma da divisão entre cada elemento da linha i 
+     * de uma coluna e o elemento da diagonal principal que pertence à linha i deverá ser menor que 1.
+    */
 
     for(j = 0; j < n; j++)
     {
@@ -271,6 +310,8 @@ double criterioColunas(double** A, int n)
 double criterioNorma(double** A, int n)
 {
     double norma;
+    
+    //Se a norma de Frobenius da matriz A for menor que 1, o critério será satisfeito.
 
     norma = normaF(A,n);
 
@@ -303,7 +344,11 @@ double criterioSassenfeld(double** A, int n)
         }
         b[i] /= A[i][i];
     }
-
+    
+    /*
+    Busca o maior elemento do vetor b calculado acima. Caso esse elemento seja 
+    menor que 1, o critério será satisfeito.
+    */
     maior = normaInfinito(b, n);
 
     if(maior >= 1)
@@ -315,11 +360,18 @@ double criterioSassenfeld(double** A, int n)
 int cholesky(double **A, double **R, int n)
 {
     int i, j, k;
+    
+    //R será uma matriz triangular superior caso A seja definida positiva e simétrica.
 
     for(i = 0; i < n; i++)
     {
         R[i][i] = 0;
 
+	//Em cada iteração i será calculado o elemento da diagonal principal pertencente à linha i.
+	/*
+	O loop abaixo calcula o somatório do quadrado dos elementos que estão acima 
+	do elemento da diagonal principal pertencente à linha i.
+	*/
         for(k = 0; k < i; k++)
             R[i][i] += R[k][i] * R[k][i];
 
@@ -333,6 +385,10 @@ int cholesky(double **A, double **R, int n)
         for(j = i+1; j < n; j++)
         {
             R[i][j] = 0;
+	    /*
+	     * O loop abaixo calcula o somatório da multiplicação entre um elemento pertencente à coluna i
+	     * e outro pertencente à coluna j, sendo que ambos são pertencentes à uma linha k menor que i.
+	    */
             for(k = 0; k < i; k++)
                 R[i][j] += R[k][i] * R[k][j];
 
@@ -355,6 +411,9 @@ int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned lo
     d = criaVetor(n);
     c = criaVetor(n);
     
+    if(tol == 0)
+	tol = DBL_EPSILON;
+    
     for(i = 0; i < n; i++)
 	x[i] = b[i] / A[i][i];
     
@@ -366,8 +425,6 @@ int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned lo
     
     while(erro >= tol && k < iMax)
     {
-	if(erro == 0 && tol == 0)
-	    return 1;
 	
 	multiplicaVetor(A, n, n, d, c, n); // c = Ad
 	q = (produtoEscalar(r, d, n) * (-1)) / produtoEscalar(d, c, n); // q = -<r, d> / <d, Ad>
@@ -403,6 +460,9 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
     double x0, x1, *deriv, erro = tolerancia + 1;
     unsigned long int k = 0;
     
+    if(tolerancia == 0)
+	tolerancia = DBL_EPSILON;
+    
     deriv = criaVetor(n-1);
     
     x0 = 1;
@@ -413,14 +473,18 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
     {
 	double p, d;
 	
+	//Calcula o valor de p no ponto (x0, p) do polinômio dado
 	p = ordenada(polinomio, x0, n);
-	    
+	
+	//Calcula a derivada no ponto (x0, p) do polinômio dado
 	d = ordenada(deriv, x0, n-1);
-	    
+	
+	//Calcula novo valor de x com base na iteração anterior, ou no x0 inicial
 	x1 = x0 - (p / d);
 	    
-	erro = erroRelativo(x1, x0);
-	    
+	erro = fabs(x1 - x0);
+	
+	//x0 recebe x1, pois na proxima iteração, x1 atual será o x da iteração anterior (x0)
 	x0 = x1;
 	
 	k++;
