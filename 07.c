@@ -54,7 +54,8 @@ int main()
     else
         printf("[ ]");
     printf(" %lf\n\n", cSassenfeld);
-
+    
+    //O algoritmo ficará parado no loop abaixo caso o usuário não escolha entre um dos dois métodos.
     while(escolha != 1 && escolha != 2)
     {
         printf("Escolha um metodo para resolver o sistema:\n");
@@ -72,18 +73,22 @@ int main()
 
     if(escolha == 1 && (cNorma || cColuna || cLinha))
     {
+	//Se há garantia de convergência, então a tolerância pode ser zero.
         ok = jacobi(A, b, x, 0, iMax, n);
     }
     else if(escolha == 1 && !(cNorma || cColuna || cLinha))
     {
+	//Nesse caso a tolerância tem que ser a escolhida pelo usuário, pois não garantia de convergência.
         ok = jacobi(A, b, x, tol, iMax, n);
     }
     else if(cNorma || cColuna || cLinha || cSassenfeld)
     {
+	//Se há garantia de convergência, então a tolerância pode ser zero.
         ok = gaussSeidel(A, b, x, 0, iMax, n);
     }
     else if(!(cNorma || cColuna || cLinha || cSassenfeld))
     {
+	//Nesse caso a tolerância tem que ser a escolhida pelo usuário, pois não garantia de convergência.
         ok = gaussSeidel(A, b, x, tol, iMax, n);
     }
 
