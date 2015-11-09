@@ -44,7 +44,7 @@ int main()
       X[i][j] = AAt[i][j];//
 
   matrizNula(Y, 2, 2);//
-  for (i = 0; i < 2; i++)//copia a matriz AAt para a matriz X
+  for (i = 0; i < 2; i++)//copia a matriz AAt para a matriz Y
     for (j = 0; j < 2; j++)//
       Y[i][j] = AAt[i][j];//
 
