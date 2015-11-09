@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <float.h>
 #include "operacoes.h"
 #include "metodos.h"
 #include "saida.h"
@@ -13,6 +14,7 @@ int main()
     printf("Digite o grau do polinomio: ");
     scanf("%d%*c", &n);
     
+    //Um polinômio de n graus possui n+1 coeficientes
     polinomio = criaVetor(n + 1);
     
     printf("Digite os coeficientes do polinomio, em ordem: ");
@@ -37,7 +39,10 @@ int main()
 	printf("Nao foram encontradas raizes neste polinomio.\n");
     }
     
+    //Calcula p0 no ponto (0, p0) do polinômio dado.
     p0 = ordenada(polinomio, 0, n);
+    
+    //Calcula p1 no ponto (1, p1) do polinômio dado.
     p1 = ordenada(polinomio, 1, n);
     
     printf("Os seguintes pontos pertencem ao polinomio:\n(%d, %lf)\n(%d, %lf)\n", 0, p0, 1, p1);
