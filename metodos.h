@@ -83,4 +83,14 @@ int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned lo
  */
 int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int iMax, int n);
 
+/**
+ * Método de Gram-Schimdt para determinar uma base ortonormal de um conjunto de vetores.
+ */
+void schmidt(double** vetores, double** base, int dimensao);
+
+/**
+ * Método de Gram-Schimdt modificado.
+ */
+void schmidtModificado(double** vetores, double** base, int dimensao);
+
 #endif // METODOS_H_INCLUDED
