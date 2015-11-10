@@ -346,7 +346,7 @@ void encontraGraus(double **matrizA, int n, int m, double **matrizD)
 
 void matrizNula(double **matriz, int n, int m)
 {
-    int i,j;
+    int i, j;
     
     for(i = 0; i < n; i++)
         for(j = 0; j < m; j++)
@@ -401,19 +401,19 @@ int isOrtonormal(double** vetores, int dimensao)
     
     for(i = 0; i < dimensao; i++)
     {
-	norma = normaDois(vetores[i], dimensao);
+	    norma = normaDois(vetores[i], dimensao);
 	
-	if(fabs(norma - 1) > tolerancia)
-	    return 0;
+	    if(fabs(norma - 1) > tolerancia)
+	        return 0;
     }
     
     for(i = 0; i < dimensao; i++)
-	    for(j = i + 1; j < dimensao; j++)
+        for(j = i + 1; j < dimensao; j++)
 	    {
-	        produtoI = produtoEscalar(vetores[i], vetores[j], dimensao);
+	    produtoI = produtoEscalar(vetores[i], vetores[j], dimensao);
 	    
-	        if(fabs(produtoI) > tolerancia)
-		        return 0;
+	    if(fabs(produtoI) > tolerancia)
+		    return 0;
 	    }
     
     return 1;
