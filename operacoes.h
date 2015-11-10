@@ -167,4 +167,24 @@ Encontra o determinante de uma matriz identidade.
 */
 double determinanteI(double **matrizI, int n);
 
+/**
+ * Multiplica o "vetor" por um "escalar". O vetor "resultado" receberá o novo vetor.
+ */
+void multiplicaPorEscalar(double* vetor, double* resultado, double escalar, int n);
+
+/**
+ * Realiza a projeção ortogonal do vetor w sobre o vetor v.
+ */
+void projecaoOrtogonal(double* w, double* v, double* proj, int n);
+
+/**
+ * Atribui os elementos do vetor x ao vetor y.
+ */
+void atribui(double* y, double* x, int n);
+
+/**
+ * Verifica se um conjunto de vetores são ortonormais entre si, dois a dois
+ */
+int isOrtonormal(double** vetores, int dimensao);
+
 #endif // OPERACOES_H_INCLUDED
