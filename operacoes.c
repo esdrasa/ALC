@@ -364,3 +364,47 @@ double determinanteI(double **matrizI, int n)
 
     return resultado;
 }
+
+void multiplicaPorEscalar(double* vetor, double* resultado, double escalar, int n)
+{
+    int i;
+    
+    for(i = 0; i < n; i++)
+	resultado[i] = vetor[i] * escalar;
+}
+
+void projecaoOrtogonal(double* w, double* v, double* proj, int n)
+{
+    double alpha;
+    
+    alpha = produtoEscalar(w, v, n) / produtoEscalar(v, v, n);
+    
+    multiplicaPorEscalar(v, proj, alpha, n);
+}
+
+void atribui(double* y, double* x, int n)
+{
+    int i;
+    
+    if(x == y)
+	return;
+    
+    for(i = 0; i < n; i++)
+	y[i] = x[i];
+}
+
+int isOrtonormal(double** vetores, int dimensao)
+{
+    int i, j;
+    
+    for(i = 0; i < dimensao; i++)
+	if(normaDois(vetores[i], dimensao) != 1)
+	    return 0;
+    
+    for(i = 0; i < dimensao; i++)
+	for(j = i + 1; j < dimensao; j++)
+	    if(produtoEscalar(vetores[i], vetores[j], dimensao))
+		return 0;
+    
+    return 1;
+}
