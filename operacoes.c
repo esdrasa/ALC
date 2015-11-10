@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
+#include <float.h>
 
 double** criaMatriz(int m, int n)
 {
@@ -396,15 +397,24 @@ void atribui(double* y, double* x, int n)
 int isOrtonormal(double** vetores, int dimensao)
 {
     int i, j;
+    double norma, produtoI, tolerancia = DBL_EPSILON * 100;
     
     for(i = 0; i < dimensao; i++)
-	if(normaDois(vetores[i], dimensao) != 1)
+    {
+	norma = normaDois(vetores[i], dimensao);
+	
+	if(fabs(norma - 1) > tolerancia)
 	    return 0;
+    }
     
     for(i = 0; i < dimensao; i++)
-	for(j = i + 1; j < dimensao; j++)
-	    if(produtoEscalar(vetores[i], vetores[j], dimensao))
-		return 0;
+	    for(j = i + 1; j < dimensao; j++)
+	    {
+	        produtoI = produtoEscalar(vetores[i], vetores[j], dimensao);
+	    
+	        if(fabs(produtoI) > tolerancia)
+		        return 0;
+	    }
     
     return 1;
 }
