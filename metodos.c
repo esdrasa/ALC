@@ -497,3 +497,61 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
     
     return 1; 
 }
+
+void schmidt(double** vetores, double** base, int dimensao)
+{
+    int i, j;
+    double *proj, norma;
+    
+    proj = criaVetor(dimensao);
+    
+    for(i = 0; i < dimensao; i++)
+    {
+	atribui(base[i], vetores[i], dimensao);
+	
+	for(j = 0; j < i; j++)
+	{
+	    projecaoOrtogonal(vetores[i], base[j], proj, dimensao);
+	    subtraiVetores(base[i], proj, base[i], dimensao);
+	}
+    }
+    
+    for(i = 0; i < dimensao; i++)
+    {
+	norma = normaDois(base[i], dimensao);
+	multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
+    }
+    
+    liberaVetor(proj);
+}
+
+void schmidtModificado(double** vetores, double** base, int dimensao)
+{
+    int i, j, t;
+    double *proj, norma;
+    
+    proj = criaVetor(dimensao);
+    
+    for(i = 0; i < dimensao; i++)
+    {
+	atribui(base[i], vetores[i], dimensao);
+	
+	for(j = 0; j < i; j++)
+	{
+	    if(j == 0)
+		projecaoOrtogonal(vetores[i], base[j], proj, dimensao);
+	    else
+		projecaoOrtogonal(base[i], base[j], proj, dimensao);
+	    
+	    subtraiVetores(base[i], proj, base[i], dimensao);
+	}
+    }
+    
+    for(i = 0; i < dimensao; i++)
+    {
+	norma = normaDois(base[i], dimensao);
+	multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
+    }
+    
+    liberaVetor(proj);
+}
