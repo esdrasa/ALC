@@ -93,4 +93,12 @@ void schmidt(double** vetores, double** base, int dimensao);
  */
 void schmidtModificado(double** vetores, double** base, int dimensao);
 
+double potencia(int n, double tol, double **A, double *x);
+
+/**
+	Metodo da potencia para calcular o Autovalor dominante de uma matriz.
+	n = Tamanho da matrix nxn
+	tol = tolerancia do metodo
+*/
+
 #endif // METODOS_H_INCLUDED
