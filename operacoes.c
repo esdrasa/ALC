@@ -418,3 +418,12 @@ int isOrtonormal(double** vetores, int dimensao)
     
     return 1;
 }
+
+void divideVetorPorEscalar(double *v, int n, double escalar)
+{  
+    int i;
+    for ( i = 0; i < n; i++)
+    {
+        v[i] = v[i]/escalar;
+    }
+}
