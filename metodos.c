@@ -555,3 +555,58 @@ void schmidtModificado(double** vetores, double** base, int dimensao)
     
     liberaVetor(proj);
 }
+
+double potencia(int n, double tol, double **A, double *x) {
+  //Definindo as variaveis que vao ser usadas
+  double *q,
+          sigma = 0,
+          sigmaAux,
+          *vetorAux,
+          limite;
+
+  int i = 0,
+      j = 0,
+      k = 0,
+      l = 0,
+      FLAG = 0;
+
+  // Alocando os vetores
+  q = criaVetor(n);
+  vetorAux = criaVetor(n);
+  
+  //Definindo os valores iniciais das variaveis
+  sigmaAux = normaInfinito(x, n);
+  divideVetorPorEscalar(x, n, sigmaAux);
+
+  //LOOP DO METODO
+  while(FLAG == 0){
+    //A*x = Aqi
+    multiplicaVetor(A, n, n, x, q, 1);
+
+    //Achando o sigma usando a norma infinito
+    sigmaAux = normaInfinito(q, n);
+
+    //Usei um vetor auxiliar para verificar o limite para a tolerancia do metodo
+    for( l = 0; l< n; l++) 
+      vetorAux[l] = x[l] - q[l]/sigmaAux;
+
+    limite = normaInfinito(vetorAux, n);    
+
+    //Transformando o vetor x em qi
+    for(i = 0; i < n; i++)
+      x[i] = q[i]/sigmaAux;
+
+    //Verificacao da tolerancia
+    if(fabs(limite) < tol) 
+      FLAG = 1;
+
+    //define sigma como o sigma auxiliar
+    sigma = sigmaAux;
+
+    //chama a funcao para imprimir
+    imprimePotencia(x, sigma, n, k);
+    k++;
+  }
+  //o ultimo sigma vai ser o autovalor dominante
+  return sigma;
+}
