@@ -607,6 +607,9 @@ double potencia(int n, double tol, double **A, double *x) {
     imprimePotencia(x, sigma, n, k);
     k++;
   }
+  //liberando o espaço alocado
+  liberaVetor(q);
+  liberaVetor(vetorAux);
   //o ultimo sigma vai ser o autovalor dominante
   return sigma;
 }
