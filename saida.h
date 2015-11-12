@@ -11,4 +11,9 @@ Imprime um vetor de tamanho n no terminal
 */
 void imprimeVetor(double* v, int n);
 
+/**
+Imprime o metodo das potencias
+*/
+void imprimePotencia(double *x, double sigma, int n, int k);
+
 #endif // SAIDA_H_INCLUDED
