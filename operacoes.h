@@ -187,4 +187,10 @@ void atribui(double* y, double* x, int n);
  */
 int isOrtonormal(double** vetores, int dimensao);
 
+void divideVetorPorEscalar(double *v, int n, double escalar);
+
+/**
+  *Divide um vetor por um escalar
+  */
+
 #endif // OPERACOES_H_INCLUDED
