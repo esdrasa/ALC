@@ -9,7 +9,6 @@ int main() {
   int n, i;
   double **A,
           *x,
-          *q,
           tol = 0.000001,
           autovalor;
 
@@ -29,6 +28,10 @@ int main() {
 
   printf("\nO Autovalor Dominante e: %lf\n",autovalor );
 
+   //liberando espaço alocado
+  liberaVetor(x);
+  liberaMatriz(A, n);
+  
   getchar();
   return 0;
 }
