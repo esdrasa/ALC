@@ -22,3 +22,19 @@ void imprimeVetor(double* v, int n)
         printf("%lf\n", v[i]);
     printf("\n");
 }
+
+void imprimePotencia(double *x, double sigma, int n, int k) {
+  int i;
+
+  if(k == 0)
+  {
+    printf("n\t Sigma \t\t\t Vetor q \n");
+    printf("-----------------------------------------------------------------\n");
+    }
+  printf("%d\t ", k + 1);
+  printf("%lf\t", sigma);
+  for(i = 0; i < n; i++) {
+    printf("%lf ", x[i]);
+  }
+  printf("\n");
+}
