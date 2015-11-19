@@ -11,6 +11,7 @@ int main(void) {
     double **matriz, *vetorB, *vetorB2, **matrizTrans, **matrizMultA, *matrizMultB, *vetorX, **matrizL, **matrizU;
 
     int n, m;
+    double x, resultado;
 
     printf("Digite a quantidade de linha(s): ");
     scanf("%d%*c",&n);
@@ -29,13 +30,13 @@ int main(void) {
     printf("\nResolvendo problemas de minimos quadrados da seguinte maneira:\n");
     printf("A'Ax = A'b.\n");
     printf("Obs: A' = A(transposto).\n");
-    
+
     matrizTrans = criaMatriz(m, n);
     transposta(matriz, matrizTrans, n, m); // Transpor a matriz A
-    
+
     matrizMultA = criaMatriz(m, m);
     multiplica(matrizTrans, m, n, matriz, n, m, matrizMultA); // Multiplica a matriz A' por A.
-    
+
     matrizMultB = criaVetor(m);
     multiplicaVetor(matrizTrans, m, n, vetorB, matrizMultB, m); // Multiplica a matriz A' pelo vetor B
 
@@ -51,7 +52,7 @@ int main(void) {
 
     printf("Utilizando o metodo LU.\n");
 
-    
+
     lu(matrizMultA, matrizL, matrizU, m);
 
     printf("\nMatriz L:\n");
@@ -70,16 +71,24 @@ int main(void) {
 
     vetorB2 = criaVetor(m);
     forwardSub(matrizL, matrizMultB, vetorB2, m);
-    
+
     vetorX = criaVetor(m);
     backSub(matrizU, vetorB2, vetorX, m);
 
     printf("\nObtido o vetor solucao.\n");
 
-    printf("\nVetor solucao:\n");
-    imprimeVetor(vetorX, m);
-    
+    printf("\nVetor solucao(A e B, respectivamente):\n");
+    imprimeVetor(vetorX, m); // Colocar para imprimir o A e o B separados
+
+    printf("Digite um valor para X:\n");
+    scanf("%lf%*c",&x);
+
+    resultado = vetorX[0]*x + vetorX[1];
+    printf("Resultado com o X solicitado: %lf",resultado);
+
+
+
     getchar();
-   
+
     return 0;
 }
