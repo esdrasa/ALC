@@ -28,7 +28,7 @@ void imprimePotencia(double *x, double sigma, int n, int k) {
 
   if(k == 0)
   {
-    printf("n\t Sigma \t\t\t Vetor q \n");
+    printf("i\t Sigma \t\t\t Vetor q \n");
     printf("-----------------------------------------------------------------\n");
     }
   printf("%d\t ", k + 1);
