@@ -1,0 +1,10 @@
+O metodo da potencia diz que se A e uma matriz quadrada nxn (para esse metodo vamos assumir que A é semi-simples) significa que A tem n autovetores e n autovalores, e que o maior autovalor em modulo e chamado de Autovalor Dominante.
+Para achar o Autovalor Dominante sera usada uma matriz A,o vetor x e uma tolerancia (geralmente 10^-6).
+Definimos o sigma que vai ser a norma infinita do vetor x, e dividiremos o vetor x por esse sigma.
+Logo, sera feito um loop que rodara enquanto o limite(modulo da norma infinita de xi-qi/sigmai da iteração i que esta ocorrendo) for menor que a tolerancia.
+No loop ocorrera as seguintes operacoes:
+-Faremos A*xt, isso gera um vetor qi.
+-Faremos a norma infinita do vetor q, gerando um novo sigma
+-Dividiremos o vetor q por esse sigma, gerando qi+1.
+-Quando chegar na tolerancia, o metodo deve parar e o sigma vai ser o Autovalor Dominante.
+Gostaria de Testar o metodo?
