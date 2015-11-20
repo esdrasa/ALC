@@ -1,0 +1,17 @@
+O metodo SOR (Sobre-Relaxacao Sucessiva) e um melhoramento do metodo iterativo de Gauss-Seidel para solucao de sistemas lineares.
+O termo w usado na equacao do metodo, pode acelerar a convergencia do sistema. e se ele for igual a 1, o metodo executara da mesma forma que o metodo de Gauss-Seidel.
+Existem 3 teoremas que suportam o metodo para uma convergencia otima:
+1) Se aii for diferente de 0, para todos os valores de i, entao p(Tw) e maior ou igual ao modulo de w-1. Assim implicando que o metodo SOR somente converge para um w entre 0 e 2.
+2) Se A e uma matriz positiva definida e w esta entre 0 e 2, entao o metodo vai convergir para qualquer valor inicial.
+3) Se A e uma matriz positiva definida e tridiagonal, entao p(Tg) = [p(Tj)²] < 1 e a opcao otima para w e dada por w = 2/1+RAIZ(1-[p(Tj)²]).
+Algumas consideracoes:
+O metodo nao havera solucao se algum elemento da diagonal principal da matriz for 0.
+O metodo continuara rodando enquanto nao atingir o numero de iteracoes maxima ou se o erro for maior ou igual a tolerancia.
+No Loop:
+-Sera feita a divisao do vetor x pela matriz A e guardada em um vetor y.
+-Se estiver fora da diagonal principal, a multiplicacao de Aij por xj e guardado na variavel soma.
+-Sera feita a equacao: y[i] = ((1 - w) * y[i]) + (w * (x[i] - soma) / A[i][i]);
+-Sera verificado o erro em relacao a anterior.
+
+Apos isso o vetor y sera a solucao do sistema.
+Deseja testar o metodo?
