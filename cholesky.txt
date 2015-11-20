@@ -1,0 +1,13 @@
+A fatoracao de Cholesky (ou decomposição de Cholesky) determina, que se a matriz A for positiva definida (Matriz nao singular, simetrica, det > 0) entao A pode ser decomposta em Rt*R (R sendo uma matriz triangular superior e com a diagonal principal positiva).
+R agora e chamado de fator Cholesky de A.
+Queremos resolver o sistema A*x = b (Sendo A uma matriz,x um vetor coluna e b um vetor), e logo se a matriz A = Rt*R, entao queremos resolver Rt*R*x = b.
+Se sabemos o fator Cholesky R, entao podemos fazer y = R*x, entao o sistema ficara Rt*y = b.
+Como Rt e triangular inferior, podemos resolver y por substituiçao para frente.
+E se sabemos y podemos resolver R*x com substituicao para tras.
+Se nao sabemos o fator de Cholesky R, a melhor maneira de acha-lo e igualando a matriz A a uma multiplicacao de matriz triangular superior de incognitas e de uma matriz triangular inferior de incognitas.
+Podemos fazer um sistema linear e resolve-lo, ou podemos usar duas equacoes que vao ser (r sendo o resultado da multiplicacao das duas matrizes triangulares, i e j sendo as linhas e colunas da matriz):
+rii = +RAIZ[aii - SOMATORIO(r^2ki, começando com k = 1 e indo ate i-1)]
+rij = [aij - SOMATORIO(rki*rkj, comecando com k = 1 e indo ate i-1)] | rii  j = i+1,...,n.
+Porem, se o Fator Cholesky nao puder ser encontrado, nao poderemos realizar a fatoracao Cholesky.
+
+Vamos testar a fatoracao?
