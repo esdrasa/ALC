@@ -14,24 +14,21 @@ int main() {
 
   //Lendo os dados necessários
 
-  printf("Digite a dimensão da matriz\n");
+  printf("Digite a dimensão da matriz: \n");
   scanf("%d%*c", &n);
-  A = lerMatriz(n, n);
-  imprimeMatriz(A, n, n);
+  printf("\n");
 
-  printf("Digite o Vetor x\n");
+  A = lerMatriz(n, n);
   x = lerVetor(n);
-  imprimeVetor(x, n);
 
   //Chamando o metodo da potencia.
   autovalor = potencia(n, tol, A, x);
 
-  printf("\nO Autovalor Dominante e: %lf\n",autovalor );
+  printf("\nO Autovalor Dominante e: %lf\n\n",autovalor );
 
    //liberando espaço alocado
   liberaVetor(x);
   liberaMatriz(A, n);
   
-  getchar();
   return 0;
 }
