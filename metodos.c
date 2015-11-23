@@ -1,4 +1,5 @@
 #include "operacoes.h"
+#include "saida.h"
 #include <math.h>
 #include <float.h>
 
