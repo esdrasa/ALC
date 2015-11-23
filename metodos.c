@@ -89,7 +89,10 @@ int jacobi(double** A, double* b, double* x, double tolerancia, unsigned long in
         a menos que as linha da matriz sejam permutadas.
         */
         if(A[i][i] == 0)
+	{
+	    liberaVetor(xant);
             return 0;
+	}
 
         //primeiro vetor para solução do método iterativo
         x[i] = b[i] / A[i][i];
@@ -151,7 +154,10 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
         a menos que as linhas da matriz sejam permutadas.
         */
         if(A[i][i] == 0)
+	{
+	    liberaVetor(xant);
             return 0;
+	}
 
         //primeiro vetor para solução do método iterativo
         x[i] = b[i] / A[i][i];
@@ -181,6 +187,8 @@ int gaussSeidel(double** A, double* b, double* x, double tolerancia, unsigned lo
 
         k++;
     }
+    
+    liberaVetor(xant);
 
     /*
     Se erro for maior que a tolerancia no final das iterações, significa que
@@ -214,7 +222,10 @@ int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned 
         a menos que as linha da matriz sejam permutadas.
         */
         if(A[i][i] == 0)
+	{
+	    liberaVetor(xant);
             return 0;
+	}
 
         //primeiro vetor para solução do método iterativo
         x[i] = b[i] / A[i][i];
@@ -244,6 +255,8 @@ int SOR(double** A, double* b, double* x, double tolerancia, double w, unsigned 
 
         k++;
     }
+    
+    liberaVetor(xant);
 
     /*
     Se erro for maior que a tolerancia no final das iterações, significa que
@@ -351,6 +364,8 @@ double criterioSassenfeld(double** A, int n)
     menor que 1, o critério será satisfeito.
     */
     maior = normaInfinito(b, n);
+    
+    liberaVetor(b);
 
     if(maior >= 1)
         return 0;
@@ -452,6 +467,11 @@ int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned lo
     if(erro >= tol)
 	return 0;
     
+    liberaVetor(x0);
+    liberaVetor(r);
+    liberaVetor(d);
+    liberaVetor(c);
+    
     return 1;
 }
 
@@ -490,6 +510,8 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
 	
 	k++;
     }
+    
+    liberaVetor(deriv);
     
     if(k >= iMax)
 	return 0;
