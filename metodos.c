@@ -670,7 +670,7 @@ void perturba(double* x, double* xp, double intervalo, int n)
 
 void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls, double li, int nr, int n)
 {
-    double *xp, *r, *rp, rnd0, rnd = 0, normaRp, normaR, variacao;
+    double *xp, *r, *rp, rnd0, rnd = 0, normaRp, normaR, variacao, intervalo = 2;
     int i, j;
     
     rnd0 = aleatorio();
@@ -687,13 +687,16 @@ void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls
     {
 	for(i = 0; i < nr; i++)
 	{
-	    perturba(x, xp, 2, n);
+	    perturba(x, xp, intervalo, n);
 	    
 	    residuo(A, x, b, r, n);
 	    residuo(A, xp, b, rp, n);
 	    
 	    normaRp = normaDois(rp, n);
 	    normaR = normaDois(r, n);
+	    
+	    if(normaRp < 1)
+		    intervalo = 0.2;
 	    
 	    if(normaRp <= normaR)
 	    {
