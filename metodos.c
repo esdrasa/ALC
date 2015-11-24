@@ -645,23 +645,22 @@ double aleatorio()
     return (double)rand() / (double)RAND_MAX ;
 }
 
-
 /**
  * Função para perturbar uma solução Simulated Annealing
  */
-void perturba(double* x, double* xp, int n)
+void perturba(double* x, double* xp, double intervalo, int n)
 {
     double rnd, rnd0;
     int i;
     
-    //Número no intervalo [-1, 1]
-    rnd0 = aleatorio() * 2 - 1;
+    //Número no intervalo [-intervalo/2, intervalo/2]
+    rnd0 = aleatorio() * intervalo - (intervalo / 2);
     rnd = rnd0;
     
     for(i = 0; i < n; i++)
     {
 	while(rnd == rnd0)
-	    rnd = aleatorio() * 2 - 1;
+	    rnd = aleatorio() * intervalo - (intervalo / 2);
 	
 	rnd0 = rnd;
 	
@@ -682,19 +681,13 @@ void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls
     rp = criaVetor(n);
     
     //Busca uma solução inicial para x
-    for(i = 0; i < n; i++)
-	for(j = 0; j < n; j++)
-	    if(A[i][j] != 0)
-	    {
-		x[i] = b[i] / A[i][j];
-		break;
-	    }
+    perturba(x, x, 130, n);
     
     while(ls > li)
     {
 	for(i = 0; i < nr; i++)
 	{
-	    perturba(x, xp, n);
+	    perturba(x, xp, 2, n);
 	    
 	    residuo(A, x, b, r, n);
 	    residuo(A, xp, b, rp, n);
