@@ -427,3 +427,50 @@ void divideVetorPorEscalar(double *v, int n, double escalar)
         v[i] = v[i]/escalar;
     }
 }
+
+void preencheColuna(double **matriz, int coluna, int n, double *vetor){
+
+    int i, j;
+
+    for(i=0;i<n;i++)
+    {
+        matriz[i][coluna] = vetor[i];
+    }
+}
+
+void atualizaVel(double A1, double A2, double A3, double c1, double c2, int n, double *melhorPos, double *vetVel, double *vetPos, double *vetMB, double *vetResul){
+
+    int i;
+    for(i=0; i<n; i++)
+    {
+        vetVel[i] = A1 * vetVel[i]; ///A1*Vi
+    }
+    double resulMPSI[n], resulMBSI[n];
+
+    subtraiVetores(melhorPos, vetPos, resulMPSI, n); /// MP - Si
+    for(i=0; i<n; i++)
+    {
+        resulMPSI[i] = resulMPSI[i] * A2 * c1; ///A2*C1*(MP-Si)
+    }
+
+    subtraiVetores(vetMB, vetPos, resulMBSI, n); /// MB - Si
+    for(i=0; i<n; i++)
+    {
+        resulMBSI[i] = resulMBSI[i] * A3 * c2; ///A3*C2*(MB-Si)
+    }
+    double vetResul1[n];
+
+    somaVetores(vetVel, resulMPSI, vetResul1, n);
+    somaVetores(vetResul1, resulMBSI, vetResul,n);
+
+}
+
+void atualizaPos(double *Satual, double *velAtual, int n){
+
+    int i;
+
+    for(i=0; i<n; i++)
+    {
+        Satual[i] = Satual[i] + velAtual[i];
+    }
+}
