@@ -192,5 +192,20 @@ void divideVetorPorEscalar(double *v, int n, double escalar);
 /**
   *Divide um vetor por um escalar
   */
+  
+  /**
+Preenche a coluna de uma matriz com um vetor desejado
+*/
+void preencheColuna(double **matriz, int coluna, int n, double *vetor);
+
+/**
+Atualiza a velocidade no PSO
+*/
+void atualizaVel(double A1, double A2, double A3, double c1, double c2, int n, double *melhorPos, double *vetVel, double *vetPos, double *vetMB, double *vetResul);
+
+/**
+Atualiza a posição no PSO
+*/
+void atualizaPos(double *Satual, double *velAtual, int n);
 
 #endif // OPERACOES_H_INCLUDED
