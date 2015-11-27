@@ -1,6 +1,7 @@
 #include "operacoes.h"
 #include "saida.h"
 #include <math.h>
+#include <stdlib.h>
 #include <float.h>
 
 /*
