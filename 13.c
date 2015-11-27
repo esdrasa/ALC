@@ -5,24 +5,27 @@
 #include "entrada.h"
 
 int main() {
-	char *verifica;
-	char texto[100];
 	FILE *arquivo;
-	int escolha = 0;
+	int escolha;
+	char leitura;
 
+	do {
+	escolha = 0;
+	system("clear");
 	printf("Ola, escolha um dos seguintes topicos para ampliar seu conhecimento\n");
 	printf("1) Fatoracao Cholesky\n");
 	printf("2) Metodo das Potencias\n");
 	printf("3) Metodo iterativo SOR\n");
 	printf("4) Fatoracao LU\n");
-	printf("5) PSO/Simulated annelling\n\n");
+	printf("5) PSO/Simulated annelling\n");
+	printf("6) Sair\n\n");
 
 	printf("Digite o numero do topico escolhido\n");
 	//escolhendo o topico    
-	while(escolha < 1 || escolha > 5) {
+	while(escolha < 1 || escolha > 6) {
 		scanf("%d",&escolha);
 		printf("\n");
-		if(escolha < 1 || escolha > 5 )
+		if(escolha < 1 || escolha > 6 )
 			printf("Escolha um topico existente\n");
 	}
 
@@ -31,18 +34,10 @@ int main() {
 			printf("Nao foi possivel abrir o arquivo\n");
 		else 
 		{
-			int h = 0;
 				while(!feof(arquivo))
-				{
-					verifica = fgets(texto, 100, arquivo);
-					if (verifica) {
-						printf("%s\n", texto);
-						if(h % 6 == 0) {
-							printf("\nPressione enter para continuar\n");
-							getchar();
-						}
-					}
-					h++;
+				{	
+					fscanf(arquivo, "%c", &leitura);
+					printf("%c",leitura );					
 				}
 
 				int teste,n;
@@ -100,7 +95,9 @@ int main() {
 			        liberaMatriz(R,n);
 			    }
 			    
-		}//fecha o else		    
+		}//fecha o else
+		printf("Pressione enter para voltar ao Menu.\n");
+		getchar();
 	}//fecha o if da escolha 1
 
 	 
@@ -110,18 +107,10 @@ int main() {
 
 		else 
 		{
-			int h = 0;
 				while(!feof(arquivo))
-				{
-					verifica = fgets(texto, 100, arquivo);
-					if (verifica) {
-						printf("%s\n", texto);
-						if(h % 6 == 0) {
-							printf("\nPressione enter para continuar\n");
-							getchar();
-						}
-					}
-					h++;
+				{	
+					fscanf(arquivo, "%c", &leitura);
+					printf("%c",leitura );					
 				}
 
 				int n, i;
@@ -148,6 +137,8 @@ int main() {
 				liberaVetor(x);
 				liberaMatriz(A, n);
 		}//chave do else
+		printf("Pressione enter para voltar ao Menu.\n");
+		getchar();
 	}//chave do if da escolha 2
 
 	if(escolha == 3)
@@ -157,19 +148,10 @@ int main() {
 
 		else 
 		{
-			int h = 0;
-
 				while(!feof(arquivo))
-				{
-					verifica = fgets(texto, 100, arquivo);
-					if (verifica) {
-						printf("%s\n", texto);
-						if(h % 6 == 0) {
-							printf("\nPressione enter para continuar\n");
-							getchar();
-						}
-					}
-					h++;
+				{	
+					fscanf(arquivo, "%c", &leitura);
+					printf("%c",leitura );					
 				}
 
 			double **A, *b, *x2, tol, w;
@@ -207,7 +189,9 @@ int main() {
 		    liberaVetor(b);
 		    liberaVetor(x2);
 		}
-	}
+		printf("Pressione enter para voltar ao Menu.\n");
+		getchar();
+	}//chave do if da escolha 3
 
 	if(escolha == 4) {
 		if( (arquivo = fopen(".txt","r") ) == NULL )
@@ -218,6 +202,11 @@ int main() {
 		if( (arquivo = fopen(".txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 	}
+
+	if(escolha == 6) {
+		return 0;
+	}
+		} while(1);
 
 	fclose(arquivo);
 	return 0;
