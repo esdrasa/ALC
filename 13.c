@@ -29,7 +29,9 @@ int main() {
 			printf("Escolha um topico existente\n");
 	}
 
-	if(escolha == 1) {
+	if(escolha == 1)
+	{
+		system("clear");
 		if( (arquivo = fopen("cholesky.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 		else 
@@ -101,7 +103,9 @@ int main() {
 	}//fecha o if da escolha 1
 
 	 
-	 if(escolha == 2) {
+	 if(escolha == 2)
+	 {
+	 	system("clear");
 		if( (arquivo = fopen("potencia.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 
@@ -143,6 +147,7 @@ int main() {
 
 	if(escolha == 3)
 	{
+		system("clear");
 		if( (arquivo = fopen("sor.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 
@@ -193,10 +198,60 @@ int main() {
 		getchar();
 	}//chave do if da escolha 3
 
-	if(escolha == 4) {
-		if( (arquivo = fopen(".txt","r") ) == NULL )
-			printf("Nao foi possivel abrir o arquivo\n");
-	}
+
+	if(escolha == 4)
+	{
+		system("clear");
+		if( (arquivo = fopen("lu.txt","r") ) == NULL )
+		printf("Nao foi possivel abrir o arquivo\n");
+
+		else
+		{
+				while(!feof(arquivo))
+				{	
+					fscanf(arquivo, "%c", &leitura);
+					printf("%c",leitura );					
+				}
+
+				double **A, **l, **u, *b, *b2,*x;
+				int n;
+
+
+			    printf("Digite o tamanho da matriz: \n");
+			    scanf("%d%*c", &n);
+
+				A = lerMatriz(n, n);
+    			b = lerVetor(n);
+    			u = criaMatriz(n, n);
+    			l = criaMatrizI(n);
+    			b2 = criaVetor(n);
+			    x = criaVetor(n);
+
+				lu(A, l, u, n);
+    
+			    forwardSub(l, b, b2, n);
+			    
+			    backSub(u, b2, x, n);
+			    
+			    printf("Matriz L:\n");
+			    imprimeMatriz(l, n, n);
+
+			    printf("Matriz U:\n");
+			    imprimeMatriz(u, n, n);			    
+			    
+			    printf("Solucao obtida com o metodo LU:\n");
+			    imprimeVetor(x, n);
+
+			    liberaMatriz(A,n);
+			    liberaMatriz(l,n);
+			    liberaMatriz(u,n);
+			    liberaVetor(b);
+			    liberaVetor(b2);
+			    liberaVetor(x);
+		}
+		printf("Pressione enter para voltar ao Menu.\n");
+		getchar();
+	}//fecha o if da escolha 4
 
 	if(escolha == 5) {
 		if( (arquivo = fopen(".txt","r") ) == NULL )
