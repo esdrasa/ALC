@@ -11,7 +11,7 @@ int main(void){
     double **matrizA, *vetorB, **MP, *MB, **S, **V, *vResiduo, normaMB, *vetMB, *getVetV, *getVetMP, *getVetS, *velAtual, *vetResiduoMPCalcu,
             *vetResiduoMPAtual;
     int n, m, i, j, particulas;
-    double tol, c1 = 1, c2 = 2, A1, A2, A3;
+    double tol, c1 = 2, c2 = 2, A1, A2, A3;
 
     printf("Digite a quantidade de linhas da matriz:\n");
     scanf("%d%*c",&n);
@@ -142,7 +142,7 @@ int main(void){
         printf("\n\nSolucao do sistema\n\n");
         for(i=0; i<n; i++)
         {
-            printf("%lf\n",&MB[i]);
+            printf("%lf\n",MB[i]);
         }
 
 
