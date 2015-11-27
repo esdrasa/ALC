@@ -1,0 +1,11 @@
+A Fatoração LU é um recurso para resolver sistemas lineares A*x=b.
+
+Este metodo consiste em decompor uma matriz A em duas matrizes, sendo L uma matriz triangular inferior (com a sua diagonal principal composta por 1) e U uma matriz triangular superior.
+
+Então, um sistema que era A*x=b, se transformara em L*U*x=b.
+
+Então faremos y=U*x,entao ficara L*y=b.
+
+Assim resolvendo o sistema.
+
+Vamos testar a fatoracao?
