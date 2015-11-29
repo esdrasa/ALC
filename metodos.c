@@ -6,7 +6,7 @@
 #include <float.h>
 
 /*
- * Em métodos iterativos, quando a tolerancia passada como parâmetro for igual 0 será utilizada
+ * Em métodos iterativos, quando a tolerancia passada como parâmetro for igual 0, será utilizada
  * a constante DBL_EPSILON, da biblioteca float.h, no lugar de zero, pois DBL_EPSILON é a menor
  * diferença possível, na linguagem em uso, entre 1 e o menor valor maior que 1.
 */
