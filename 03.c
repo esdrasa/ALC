@@ -76,7 +76,7 @@ int main(){
     else
         printf("O Simulated Annealing foi mais eficiente nesse caso\n\n");
     
-    printf("Norma de Frobenius:\n");
+    printf("Norma 2 das solucoes:\n");
     printf("PSO: %lf\n", normaPSO);
     printf("Simulated Annealing: %lf\n", normaSimulated);
 
