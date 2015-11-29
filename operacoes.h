@@ -187,13 +187,17 @@ void atribui(double* y, double* x, int n);
  */
 int isOrtonormal(double** vetores, int dimensao);
 
-void divideVetorPorEscalar(double *v, int n, double escalar);
+/**
+ * Verifica se uma matriz está em banda.
+ */
+int isBanda(double** matriz, int n);
 
 /**
   *Divide um vetor por um escalar
-  */
+*/
+void divideVetorPorEscalar(double *v, int n, double escalar);
   
-  /**
+/**
 Preenche a coluna de uma matriz com um vetor desejado
 */
 void preencheColuna(double **matriz, int coluna, int n, double *vetor);
