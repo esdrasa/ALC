@@ -50,3 +50,27 @@ double* lerVetor(int n)
 
     return vetor;
 }
+
+double* lerVetorSolucao(int n)
+{
+    FILE *fVetor;
+    fVetor = fopen("vetorSolucao.txt", "r");
+
+    double *vetor;
+    int i;
+
+    vetor = criaVetor(n);
+
+    if (fVetor == NULL)
+    {
+        printf("Erro na leitura do arquivo\n");
+        exit(0);
+    }
+
+    for(i = 0; i < n; i++)
+        fscanf(fVetor, "%lf", &vetor[i]);
+
+    fclose(fVetor);
+
+    return vetor;
+}
