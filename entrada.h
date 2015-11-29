@@ -11,4 +11,9 @@ Função para ler um vetor de tamanho n do arquivo vetor.txt
 */
 double* lerVetor(int n);
 
+/**
+Função para ler um vetor de tamanho n do arquivo vetorSolucao.txt
+*/
+double* lerVetorSolucao(int n);
+
 #endif // ENTRADA_H_INCLUDED
