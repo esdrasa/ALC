@@ -32,6 +32,8 @@ int main(){
 
     printf("\nDigite a quantidade de iteracoes: ");
     scanf("%d%*c", &iteracoes);
+    
+    srand((unsigned)time(NULL));
 
     matrizA = lerMatriz(n,n);
     vetorB  = lerVetor(n);
@@ -52,8 +54,6 @@ int main(){
     printf("\n");
 
     ///Simulated Annealing
-    
-    srand((unsigned)time(NULL));
 
     simulatedAnnealing(matrizA, vetorB, vetorX, alfa, tempMax, tempMin, iteracoes, n);
 
