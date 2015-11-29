@@ -13,25 +13,25 @@ int main(void){
     int n = 2, particulas = 5, i, iteracoes = 1000;
 
    /* printf("Digite a dimensao da matriz A\n");
-    scanf("%lf",&n);*/
+    scanf("%d%*c",&n);*/
 
     /*printf("\nDigite a quantidade de particulas para o PSO\n");
-    scanf("%d",&particulas);
+    scanf("%d%*c",&particulas);
 
     printf("\nDigite a tolerancia para o PSO\n");
-    scanf("%lf",&tol);
+    scanf("%lf%*c",&tol);
 
     printf("\nDigite a temperatura maxima\n");
-    scanf("%lf",&tempMax);
+    scanf("%lf%*c",&tempMax);
 
     printf("\nDigite a temperatura minima\n");
-    scanf("%lf",&tempMin);
+    scanf("%lf%*c",&tempMin);
 
     printf("\nDigite a variacao da temperatura\n");
-    scanf("%lf",&alfa);
+    scanf("%lf%*c",&alfa);
 
     printf("\nDigite a quantidade de iteracoes\n");
-    scanf("%d",&iteracoes);*/
+    scanf("%d%*c",&iteracoes);*/
 
     matrizA = lerMatriz(n,n);
     vetorB  = lerVetor(n);
@@ -76,11 +76,8 @@ int main(void){
     }
     else
         printf("O Simulated Annealing foi mais eficiente nesse caso\n\n");
-
-
+    
     system("pause");
-
-
 
     return 0;
 }
