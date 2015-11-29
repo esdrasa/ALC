@@ -1,6 +1,7 @@
 #include "operacoes.h"
 #include "saida.h"
 #include <math.h>
+#include <time.h>
 #include <stdlib.h>
 #include <float.h>
 
@@ -727,7 +728,6 @@ void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls
     liberaVetor(rp);
 }
 
-
 void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int particulas){ /// MB é a solução do sistema
 
     double **MP, **S, **V, *vResiduo, normaMB, *vetMB, *getVetV, *getVetMP, *getVetS, *velAtual, *vetResiduoMPCalcu, *vetResiduoMPAtual;
@@ -743,17 +743,17 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
     vetResiduoMPCalcu  = criaVetor(n);
     vetResiduoMPAtual  = criaVetor(n);
 
-    S  = criaMatriz(n,particulas);
-    V  = criaMatriz(n,particulas);
-    MP = criaMatriz(n,particulas);
+    S  = criaMatriz(n, particulas);
+    V  = criaMatriz(n, particulas);
+    MP = criaMatriz(n, particulas);
 
 
     /// Inicializa os vetores das particulas
     srand((unsigned)time(NULL));
-
-    for(i=0; i<n; i++) /// cada coluna dessa matriz vai ser uma particula
+    
+    for(i = 0; i < n; i++) /// cada coluna dessa matriz vai ser uma particula
     {
-        for(j=0; j<particulas; j++)
+        for(j = 0; j < particulas; j++)
         {
             S[i][j] = rand() % 11;
             V[i][j] = rand() % 11;
@@ -763,71 +763,74 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
 
 
     /// encontrar o primeiro MB usando a primeira particula como base
-        getColuna(S, MB, 0, n);
-        residuo(matrizA, MB, vetorB, vResiduo, n);
-        normaMB = normaDois(vResiduo, n);
+    getColuna(S, MB, 0, n);
+    residuo(matrizA, MB, vetorB, vResiduo, n);
+    normaMB = normaDois(vResiduo, n);
 
 
-        for(i=0; i<particulas; i++) /// Comparar com as outras particulas para saber qual é a melhor do bando
+    for(i = 0; i < particulas; i++) /// Comparar com as outras particulas para saber qual é a melhor do bando
+    {
+	getColuna(S, vetMB, i, n);
+        residuo(matrizA, vetMB, vetorB, vResiduo, n);
+        if(normaMB > normaDois(vResiduo,n))
         {
-            getColuna(S, vetMB, i, n);
-            residuo(matrizA, vetMB, vetorB, vResiduo, n);
-            if(normaMB > normaDois(vResiduo,n))
+	    for(j = 0; j < n; j++)
             {
-                for(j=0; j<n; j++)
+                MB[j] = vetMB[j];
+	    }
+            normaMB = normaDois(vResiduo,n);
+        }
+    } /// Já tenho o vetor MB
+
+    while(tol < normaMB)
+    {
+        for(j = 0; j < particulas; j++)
+        {
+            A1 = rand() % 101;
+            A1 /= 100;
+
+            A2 = rand() % 101;
+            A2 /= 100;
+
+            A3 = rand() % 101;
+            A3 /= 100;
+
+            getColuna(V, getVetV, j, n);
+            getColuna(S, getVetS, j, n);
+            getColuna(MP, getVetMP, j, n);
+
+            atualizaVel(A1, A2, A3, c1, c2, n, getVetMP, getVetV, getVetS, MB, velAtual);
+            preencheColuna(V, j, n, velAtual); ///Atualiza os vetores de velocidade de cada particula. Já que cada coluna é uma particula, o preencheColuna vai colocar o vetor com a velocidade atualizada em cada particula
+
+            atualizaPos(getVetS, velAtual, n); /// atualiza a posicao de cada particula
+            preencheColuna(S, j, n, getVetS); /// preenche a particula atualizada
+
+            ///Atualiza o MP
+            residuo(matrizA, getVetS, vetorB, vetResiduoMPCalcu, n);
+            residuo(matrizA, getVetMP, vetorB, vetResiduoMPAtual, n);
+	    
+            if(normaDois(vetResiduoMPCalcu, n) < normaDois(vetResiduoMPAtual, n)) /// se a norma do residuo da nova posicao for menor então substitui na melhor posicao
+            {
+                preencheColuna(MP, j, n, getVetS);
+            }
+        }
+            /// pegar o MB
+        for(i = 0; i < particulas; i++) /// Comparar com as outras particulas para saber qual é a melhor do bando
+        {
+            getColuna(MP, vetMB, i, n);
+            residuo(matrizA, vetMB, vetorB, vResiduo, n);
+	    
+            if(normaMB > normaDois(vResiduo, n))
+            {
+                for(j = 0; j < n; j++)
                 {
                     MB[j] = vetMB[j];
                 }
+                
                 normaMB = normaDois(vResiduo,n);
             }
-        } /// Já tenho o vetor MB
-
-        while(tol < normaMB)
-        {
-            for(j=0; j<particulas; j++)
-            {
-                A1 = rand() % 101;
-                A1 /= 100;
-
-                A2 = rand() % 101;
-                A2 /= 100;
-
-                A3 = rand() % 101;
-                A3 /= 100;
-
-                getColuna(V, getVetV, j, n);
-                getColuna(S, getVetS, j, n);
-                getColuna(MP, getVetMP, j, n);
-
-                atualizaVel(A1,A2,A3,c1,c2,n,getVetMP,getVetV,getVetS,MB,velAtual);
-                preencheColuna(V,j,n,velAtual); ///Atualiza os vetores de velocidade de cada particula. Já que cada coluna é uma particula, o preencheColuna vai colocar o vetor com a velocidade atualizada em cada particula
-
-                atualizaPos(getVetS, velAtual, n); /// atualiza a posicao de cada particula
-                preencheColuna(S,j,n,getVetS); /// preenche a particula atualizada
-
-                ///Atualiza o MP
-                residuo(matrizA, getVetS, vetorB, vetResiduoMPCalcu, n);
-                residuo(matrizA, getVetMP, vetorB, vetResiduoMPAtual, n);
-                if(normaDois(vetResiduoMPCalcu, n) < normaDois(vetResiduoMPAtual, n)) /// se a norma do residuo da nova posicao for menor então substitui na melhor posicao
-                {
-                    preencheColuna(MP,j,n,getVetS);
-                }
-            }
-            /// pegar o MB
-            for(i=0; i<particulas; i++) /// Comparar com as outras particulas para saber qual é a melhor do bando
-            {
-                getColuna(MP, vetMB, i, n);
-                residuo(matrizA, vetMB, vetorB, vResiduo, n);
-                if(normaMB > normaDois(vResiduo,n))
-                {
-                    for(j=0; j<n; j++)
-                    {
-                        MB[j] = vetMB[j];
-                    }
-                    normaMB = normaDois(vResiduo,n);
-                }
-            }
         }
+    }
 
     liberaMatriz(S,n);
     liberaMatriz(V,n);
