@@ -782,9 +782,6 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
             }
         } /// Já tenho o vetor MB
 
-
-        printf("\n\nNorma do residuo utilizando a primeira particula:  %lf\n", normaMB);
-
         while(tol < normaMB)
         {
             for(j=0; j<particulas; j++)
