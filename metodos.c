@@ -483,7 +483,7 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
     unsigned long int k = 0;
     
     if(tolerancia == 0)
-	tolerancia = DBL_EPSILON;
+	tolerancia = DBL_EPSILON * 10;
     
     deriv = criaVetor(n-1);
     
