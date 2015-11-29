@@ -830,14 +830,6 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
                     normaMB = normaDois(vResiduo,n);
                 }
             }
-                for(i=0;i<n; i++)
-                {
-                    printf("%lf\n",MB[i]);
-                    if(i == n-1 )
-                    {
-                        printf("\n\nterminou o vetor\n\n");
-                    }
-                }
         }
 
     liberaMatriz(S,n);
