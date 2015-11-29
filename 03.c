@@ -6,32 +6,32 @@
 #include "saida.h"
 #include "entrada.h"
 
-int main(void){
+int main(){
 
     double **matrizA, *vetorB, *vetorX, *residuoPSO, *residuoSimulated;
     double tol = 0.000001, tempMax = 100, tempMin = 0.01, alfa = 0.7, normaPSO, normaSimulated;
     int n = 2, particulas = 5, i, iteracoes = 1000;
 
-   /* printf("Digite a dimensao da matriz A\n");
-    scanf("%d%*c",&n);*/
+    printf("Digite a dimensao da matriz A: ");
+    scanf("%d%*c", &n);
 
-    /*printf("\nDigite a quantidade de particulas para o PSO\n");
-    scanf("%d%*c",&particulas);
+    printf("\nDigite a quantidade de particulas para o PSO: ");
+    scanf("%d%*c", &particulas);
 
-    printf("\nDigite a tolerancia para o PSO\n");
-    scanf("%lf%*c",&tol);
+    printf("\nDigite a tolerancia para o PSO: ");
+    scanf("%lf%*c", &tol);
 
-    printf("\nDigite a temperatura maxima\n");
-    scanf("%lf%*c",&tempMax);
+    printf("\nDigite a temperatura maxima: ");
+    scanf("%lf%*c", &tempMax);
 
-    printf("\nDigite a temperatura minima\n");
-    scanf("%lf%*c",&tempMin);
+    printf("\nDigite a temperatura minima: ");
+    scanf("%lf%*c", &tempMin);
 
-    printf("\nDigite a variacao da temperatura\n");
-    scanf("%lf%*c",&alfa);
+    printf("\nDigite a variacao da temperatura: ");
+    scanf("%lf%*c", &alfa);
 
-    printf("\nDigite a quantidade de iteracoes\n");
-    scanf("%d%*c",&iteracoes);*/
+    printf("\nDigite a quantidade de iteracoes: ");
+    scanf("%d%*c", &iteracoes);
 
     matrizA = lerMatriz(n,n);
     vetorB  = lerVetor(n);
@@ -44,24 +44,23 @@ int main(void){
 
     printf("\nSolucao com PSO\n");
 
-    for(i=0; i<n; i++)
-    {
-        printf("%lf\n",vetorX[i]);
-    }
+    imprimeVetor(vetorX, n);
+    
     residuo(matrizA, vetorX, vetorB, residuoPSO, n);
     normaPSO = normaDois(residuoPSO, n);
 
-    printf("\n\n\n");
+    printf("\n");
 
     ///Simulated Annealing
-
+    
+    srand((unsigned)time(NULL));
 
     simulatedAnnealing(matrizA, vetorB, vetorX, alfa, tempMax, tempMin, iteracoes, n);
 
     printf("\nSolucao com Simulated Annealing\n");
-    for(i=0; i<n; i++)
+    for(i = 0; i < n; i++)
     {
-        printf("%lf\n",vetorX[i]);
+        printf("%lf\n", vetorX[i]);
     }
 
 
@@ -77,7 +76,12 @@ int main(void){
     else
         printf("O Simulated Annealing foi mais eficiente nesse caso\n\n");
     
-    system("pause");
+    printf("Norma de Frobenius:\n");
+    printf("PSO: %lf\n", normaPSO);
+    printf("Simulated Annealing: %lf\n", normaSimulated);
+
+
+    getchar();
 
     return 0;
 }
