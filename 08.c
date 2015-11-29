@@ -36,6 +36,12 @@ int main()
 	imprimeMatriz(base2, n, n);
     }
     
+    printf("Norma de Frobenius do conjunto de vetores obtidos:\n\n");
+	
+	printf("Metodo de Gram-Schimdt: %lf\n", normaF(base1, n));
+	
+	printf("Metodo de Gram-Schimdt modificado: %lf\n", normaF(base2, n));
+    
     getchar();
     
     return 0;
