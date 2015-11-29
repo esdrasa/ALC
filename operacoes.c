@@ -419,6 +419,14 @@ int isOrtonormal(double** vetores, int dimensao)
     return 1;
 }
 
+int isBanda(double** matriz, int n)
+{
+    if(matriz[0][n-1] == 0 && matriz[n-1][0] == 0)
+	return 1;
+    else
+	return 0;
+}
+
 void divideVetorPorEscalar(double *v, int n, double escalar)
 {  
     int i;
