@@ -749,14 +749,12 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
 
 
     /// Inicializa os vetores das particulas
-    srand((unsigned)time(NULL));
-    
     for(i = 0; i < n; i++) /// cada coluna dessa matriz vai ser uma particula
     {
         for(j = 0; j < particulas; j++)
         {
-            S[i][j] = rand() % 11;
-            V[i][j] = rand() % 11;
+            S[i][j] = aleatorio() * 10;
+            V[i][j] = aleatorio() * 10;
             MP[i][j] = S[i][j]; /// a melhor posição vai ser a primeira posição
         }
     }
@@ -786,14 +784,11 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
     {
         for(j = 0; j < particulas; j++)
         {
-            A1 = rand() % 101;
-            A1 /= 100;
+            A1 = aleatorio();
 
-            A2 = rand() % 101;
-            A2 /= 100;
+            A2 = aleatorio();
 
-            A3 = rand() % 101;
-            A3 /= 100;
+            A3 = aleatorio();
 
             getColuna(V, getVetV, j, n);
             getColuna(S, getVetS, j, n);
