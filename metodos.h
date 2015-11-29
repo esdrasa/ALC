@@ -108,5 +108,10 @@ double potencia(int n, double tol, double **A, double *x);
  * nr = número de repetições a cada iteração
  */
 void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls, double li, int nr, int n);
+ 
+ /**
+ MB é o vetor solução
+ */
+void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int particulas);
 
 #endif // METODOS_H_INCLUDED
