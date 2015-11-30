@@ -6,25 +6,20 @@
 
 int main()
 {
-    double **A, *b, *x, cLinha, cColuna, cNorma, cSassenfeld, tol;
-    int n, escolha = 0, ok = 0;
-    unsigned long int iMax;
+    double **A, cLinha, cColuna, cNorma, cSassenfeld;
+    int n;
 
     printf("Digite o tamanho do sistema: ");
     scanf("%d%*c", &n);
 
-    x = criaVetor(n);
-
     A = lerMatriz(n, n);
-
-    b = lerVetor(n);
 
     cLinha = criterioLinhas(A, n);
     cColuna = criterioColunas(A, n);
     cNorma = criterioNorma(A, n);
     cSassenfeld = criterioSassenfeld(A, n);
 
-    printf("Criterio das Linhas: ");
+    printf("\nCriterio das Linhas: ");
     if(cLinha)
         printf("[X]");
     else
@@ -54,55 +49,20 @@ int main()
     else
         printf("[ ]");
     printf(" %lf\n\n", cSassenfeld);
+
+    if(cNorma || cColuna || cLinha)
+        printf("O sistema pode ser resolvido usando o metodo de Jacobi.\n");
     
-    //O algoritmo ficará parado no loop abaixo caso o usuário não escolha entre um dos dois métodos.
-    while(escolha != 1 && escolha != 2)
-    {
-        printf("Escolha um metodo para resolver o sistema:\n");
-        printf("[1] - Metodo de Jacobi\n");
-        printf("[2] - Metodo de Gauss-Seidel\n");
 
-        scanf("%d%*c", &escolha);
-    }
+    if(cNorma || cColuna || cLinha || cSassenfeld)
+        printf("O sistema pode ser resolvido usando o metodo de Gauss-Seidel.\n");        
+    
 
-    printf("\nDigite a tolerancia para o erro relativo: ");
-    scanf("%lf%*c", &tol);
-
-    printf("Digite o numero maximo de iteracoes permitidas: ");
-    scanf("%lu%*c", &iMax);
-
-    if(escolha == 1 && (cNorma || cColuna || cLinha))
-    {
-	//Se há garantia de convergência, então a tolerância pode ser zero.
-        ok = jacobi(A, b, x, 0, iMax, n);
-    }
-    else if(escolha == 1 && !(cNorma || cColuna || cLinha))
-    {
-	//Nesse caso a tolerância tem que ser a escolhida pelo usuário, pois não garantia de convergência.
-        ok = jacobi(A, b, x, tol, iMax, n);
-    }
-    else if(cNorma || cColuna || cLinha || cSassenfeld)
-    {
-	//Se há garantia de convergência, então a tolerância pode ser zero.
-        ok = gaussSeidel(A, b, x, 0, iMax, n);
-    }
-    else if(!(cNorma || cColuna || cLinha || cSassenfeld))
-    {
-	//Nesse caso a tolerância tem que ser a escolhida pelo usuário, pois não garantia de convergência.
-        ok = gaussSeidel(A, b, x, tol, iMax, n);
-    }
-
-    if(!ok)
-    {
-        printf("Nao foi possivel resolver o sistema.\n");
-    }
-    else
-    {
-        printf("Solucao do sistema: \n");
-        imprimeVetor(x, n);
-    }
+    if(!(cSassenfeld || cNorma || cColuna || cLinha))
+        printf("Nada podemos afirmar sobre a resolucao do sistema pelos metodos.\n");
 
     getchar();
 
+    liberaMatriz(A, n);
     return 0;
 }
