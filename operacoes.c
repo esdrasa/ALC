@@ -482,3 +482,10 @@ void atualizaPos(double *Satual, double *velAtual, int n){
         Satual[i] = Satual[i] + velAtual[i];
     }
 }
+
+void vetorNulo(double *vetor, int n)
+{
+    int i;
+    for(i = 0; i < n; i++)
+        vetor[i] = 0;
+}
