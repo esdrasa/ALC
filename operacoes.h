@@ -212,4 +212,9 @@ Atualiza a posição no PSO
 */
 void atualizaPos(double *Satual, double *velAtual, int n);
 
+/**
+Preenche com zeros um vetor qualquer.
+*/
+void vetorNulo(double *vetor, int n);
+
 #endif // OPERACOES_H_INCLUDED
