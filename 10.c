@@ -8,7 +8,7 @@
 int main()
 {
   double **A, **At, **AAt, **AtA, **X, **Y, **X2, **Y2, **Uo, cofB, cofC, delta, rDelta, r1, r2;
-  double **U, **S, **V, **I, **Vt, **Av1, **Av2, *u1, *u2, *v1, *v2, *v3, vs1, vs2, *x1, *x2, *x3;
+  double **U, **S, **V, **Vt, **Av1, **Av2, *u1, *u2, *v1, *v2, *v3, vs1, vs2, *vetNulo, **UoS, **UoSVt;
   int n, i, j, k;
   printf("Decomposicao SVD para matrizes 2xn\n");
   printf("Digite o numero de colunas: ");
@@ -21,9 +21,10 @@ int main()
   S = criaMatriz(2, n);
   U = criaMatriz(2, 2);
   Uo = criaMatriz(2, 2);
+  UoS = criaMatriz(2, n);
+  UoSVt = criaMatriz(2, n);  
   X = criaMatriz(2, 2);
   Y = criaMatriz(2, 2);
-  I = criaMatriz(n, n);
   X2 = criaMatriz(n, n);
   Y2 = criaMatriz(n, n);
   V = criaMatriz(n, n);
@@ -35,14 +36,12 @@ int main()
   v1 = criaVetor(n);
   v2 = criaVetor(n);
   v3 = criaVetor(n);
-  x1 = criaVetor(n);
-  x2 = criaVetor(n);
-  x3 = criaVetor(n);
+  vetNulo = criaVetor(n);
 
-  matrizNula(S, 2, n);
-  transposta(A, At, 2, n);
-  multiplica(A, 2, n, At, n, 2, AAt);
-  multiplica(At, n, 2, A, 2, n, AtA);
+  matrizNula(S, 2, n);                  // Zera a matriz S diagonal para ela ser completada com os valores singulares
+  transposta(A, At, 2, n);             //
+  multiplica(A, 2, n, At, n, 2, AAt); // Calculo das matriz a serem encontrados os autovalores
+  multiplica(At, n, 2, A, 2, n, AtA);//
   
   cofB = AAt[0][0]*(-1) + AAt[1][1]*(-1);           //
   cofC = AAt[0][0]*AAt[1][1] - AAt[1][0]*AAt[0][1];// Encontrando os coeficientes do polinomio característico
@@ -130,7 +129,7 @@ int main()
  
   u1[0] = Uo[0][0];   //
   u2[0] = Uo[0][1];  // 
-  u1[1] = Uo[1][0]; // substitio os vetores
+  u1[1] = Uo[1][0]; // substitiu os vetores
   u2[1] = Uo[1][1];//
 
   for (i = 0; i < n; i++)
@@ -151,76 +150,41 @@ int main()
   
   V = criaMatrizI(n);
 
-  v3[0] = -2.0/3;
-  v3[1] = 1.0/3;
-  v3[2] = 2.0/3;
-
   for (i = 0; i < n; i++)
     V[i][0] = v1[i];
 
   for (i = 0; i < n; i++)
     V[i][1] = v2[i];
 
-  //for (i = 0; i < n; i++)
-   // V[i][2] = v3[i];
+  vetorNulo(vetNulo, n);
 
-  //schmidt(V, Vt, n); 
+  PSO(AtA, n, vetNulo, v3, 0.0000001, 50);  // encontra o terceiro alto vetor de AtA que é o vetor v3 ... vn esta dentro do for apenas para variar
+  //  retirar PSO do ciclo aumenta a velocidade do algoritmo, mas deixa varias linhas da matriz Vt iguais
 
-  //transposta(V, Vt, n, n);
-
-
-/*
-  matrizNula(X2, n, n);      // 
-  for (i = 0; i < n; i++)   // copia a matriz AtA para a matriz X2
-    for (j = 0; j < n; j++)//
-      X2[i][j] = AtA[i][j];//
-
-  matrizNula(Y2, n, n);      //
-  for (i = 0; i < n; i++)   //copia a matriz AtA para a matriz Y2
-    for (j = 0; j < n; j++)//
-      Y2[i][j] = AtA[i][j];//
-
-  for (i = 0; i < n; i++)
-  {
-    for (j = 0; j < n; j++)
-    {
-      if (i==j)
-        X2[i][j] = r1 - AtA[i][j]; //(Lambida_1*I - AtA)
+  for(i = 0; i < n; i++)
+    for(j = 2; j < n; j++)  //
+    {                      // Acrencenta ma matrix=z V o terceiro ou enésimo auto vetor de AtA
+      V[i][j] = v3[i];                        
     }
-  }
 
-  for (i = 0; i < n; i++)
-  {
-    for (j = 0; j < n; j++)
-    {
-      if (i==j)
-        Y2[i][j] = r2 - AtA[i][j]; //(Lambida_2*I - AtA)      
-    }
-  }*/
-  
-  
+  transposta(V, Vt, n, n);
 
-  printf("vet v1:\n");
-  imprimeVetor(v1, n);
-
-  printf("vet v2:\n");
-  imprimeVetor(v2, n);
-
-  printf("Matriz Av1:\n");
-  imprimeMatriz(Av1, n, 2);
-
-  
+  multiplica(Uo, 2, 2, S, 2, n, UoS);
+  multiplica(UoS, 2, n, Vt, 2, n, UoSVt); //calculo da prova real SVD
+ 
+  printf("\n"); 
   printf("Matriz ortogonal U:\n");
   imprimeMatriz(Uo, 2, 2);
 
   printf("Matriz diagonal S:\n");
   imprimeMatriz(S, 2, n);
 
-// falta a ortogonalização
   printf("Matriz ortogonal V:\n");
-  imprimeMatriz(V, n, n);
+  imprimeMatriz(Vt, n, n);
 
- 
+  printf("Matriz SVD:\n");
+  imprimeMatriz(UoSVt, 2, n);
+
   getchar();
   return 0;
 
