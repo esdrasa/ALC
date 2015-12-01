@@ -14,4 +14,5 @@ No Loop:
 -Sera verificado o erro em relacao a anterior.
 
 Apos isso o vetor y sera a solucao do sistema.
-Deseja testar o metodo?
+
+Vamos testar o metodo?
