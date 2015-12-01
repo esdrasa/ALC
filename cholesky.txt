@@ -1,3 +1,5 @@
+A fatoracao de Cholesky (ou decomposição de Cholesky) é usada para resolvermos sistemas A*x=b.
+Ela foi criada pelo cartógrafo Frances Andre-Louis Cholesky.
 A fatoracao de Cholesky (ou decomposição de Cholesky) determina, que se a matriz A for positiva definida (Matriz nao singular, simetrica, det > 0) entao A pode ser decomposta em Rt*R (R sendo uma matriz triangular superior e com a diagonal principal positiva).
 R agora e chamado de fator Cholesky de A.
 Queremos resolver o sistema A*x = b (Sendo A uma matriz,x um vetor coluna e b um vetor), e logo se a matriz A = Rt*R, entao queremos resolver Rt*R*x = b.
