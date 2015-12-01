@@ -4,6 +4,11 @@
 #include "saida.h"
 #include "entrada.h"
 
+void clear()
+{
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+
 int main() {
 	FILE *arquivo;
 	int escolha;
@@ -11,7 +16,7 @@ int main() {
 
 	do {
 	escolha = 0;
-	system("clear");
+	clear();
 	printf("Ola, escolha um dos seguintes topicos para ampliar seu conhecimento\n");
 	printf("1) Fatoracao Cholesky\n");
 	printf("2) Metodo das Potencias\n");
@@ -31,7 +36,7 @@ int main() {
 
 	if(escolha == 1)
 	{
-		system("clear");
+		clear();
 		if( (arquivo = fopen("cholesky.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 		else 
@@ -105,7 +110,7 @@ int main() {
 	 
 	 if(escolha == 2)
 	 {
-	 	system("clear");
+	 	clear();
 		if( (arquivo = fopen("potencia.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 
@@ -147,7 +152,7 @@ int main() {
 
 	if(escolha == 3)
 	{
-		system("clear");
+		clear();
 		if( (arquivo = fopen("sor.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 
@@ -201,7 +206,7 @@ int main() {
 
 	if(escolha == 4)
 	{
-		system("clear");
+		clear();
 		if( (arquivo = fopen("lu.txt","r") ) == NULL )
 		printf("Nao foi possivel abrir o arquivo\n");
 
@@ -255,7 +260,7 @@ int main() {
 
 	if(escolha == 5)
 	{
-		system("clear");
+		clear();
 		if( (arquivo = fopen("newton.txt","r") ) == NULL )
 			printf("Nao foi possivel abrir o arquivo\n");
 
