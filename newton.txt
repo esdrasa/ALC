@@ -1,5 +1,5 @@
 O metodo de Newton-Raphson é usado para estimar raizes de uma funcao de grau n.
-Indicamos tambem uma tolerancia para 
+Indicamos tambem uma tolerancia para a diferenca entre a raiz real e a aproximacao.
 No inicio do metodo, usamos uma aproximacao inicial para o valor da raiz.
 Apos isso, é calculada a derivada da funcao nesse ponto e sua intersecao com o eixo x, assim tentando encontrar uma melhor aproximacao para a raiz.
 Logo, esse processo vira um metodo iterativo que faz as seguintes operacoes:
@@ -8,3 +8,4 @@ Logo, esse processo vira um metodo iterativo que faz as seguintes operacoes:
 O metodo roda enquanto |xn+1 - xn| > tolerancia e o maximo de iteracoes nao for atingido.
 Se |xn+1 - xn| < tolerancia, a raiz e encontrada.
 
+Vamos testar o metodo?
