@@ -56,6 +56,13 @@ int main(void) {
    printf("%lf",angulo(vetorColuna1, vetorColuna2, n));
 
    getchar();
+   
+   liberaMatriz(matrizA,n);
+   liberaMatriz(matrizL,n);
+   liberaMatriz(matrizD,n);
+
+   liberaVetor(vetorColuna1);
+   liberaVetor(vetorColuna2);
 
    return 0;
 }
