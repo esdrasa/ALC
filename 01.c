@@ -41,6 +41,9 @@ int main()
         printf("Determinante: %lf\n", detVandermonde(A, n));
 
     getchar();
+    
+    liberaMatriz(A, n);
+    liberaVetor(coluna);
 
     return 0;
 }
