@@ -539,10 +539,7 @@ void schmidt(double** vetores, double** base, int dimensao)
 	    projecaoOrtogonal(vetores[i], base[j], proj, dimensao);
 	    subtraiVetores(base[i], proj, base[i], dimensao);
 	}
-    }
-    
-    for(i = 0; i < dimensao; i++)
-    {
+	
 	norma = normaDois(base[i], dimensao);
 	multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
     }
@@ -563,17 +560,11 @@ void schmidtModificado(double** vetores, double** base, int dimensao)
 	
 	for(j = 0; j < i; j++)
 	{
-	    if(j == 0)
-		projecaoOrtogonal(vetores[i], base[j], proj, dimensao);
-	    else
-		projecaoOrtogonal(base[i], base[j], proj, dimensao);
+	    projecaoOrtogonal(base[i], base[j], proj, dimensao);
 	    
 	    subtraiVetores(base[i], proj, base[i], dimensao);
 	}
-    }
-    
-    for(i = 0; i < dimensao; i++)
-    {
+	
 	norma = normaDois(base[i], dimensao);
 	multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
     }
