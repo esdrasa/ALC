@@ -25,7 +25,9 @@ int main() {
   autovalor = potencia(n, tol, A, x);
 
   printf("\nO Autovalor Dominante e: %lf\n\n",autovalor );
-
+    
+    getchar();
+    
    //liberando espaço alocado
   liberaVetor(x);
   liberaMatriz(A, n);
