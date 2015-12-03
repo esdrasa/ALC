@@ -95,6 +95,16 @@ int main()
     }
 
     getchar();
+    
+    liberaMatriz(A, n);
+    liberaMatriz(R, n);
+    liberaMatriz(Rt, n);
+    liberaVetor(b);
+    liberaVetor(y);
+    liberaVetor(x1);
+    liberaVetor(x2);
+    liberaVetor(r1);
+    liberaVetor(r2);
 
     return 0;
 }
