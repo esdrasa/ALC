@@ -79,9 +79,14 @@ int main(){
     printf("Norma 2 das solucoes:\n");
     printf("PSO: %lf\n", normaPSO);
     printf("Simulated Annealing: %lf\n", normaSimulated);
-
-
+    
     getchar();
+    
+    liberaMatriz(matrizA, n);
+    liberaVetor(vetorB);
+    liberaVetor(vetorX);
+    liberaVetor(residuoPSO);
+    liberaVetor(residuoSimulated);
 
     return 0;
 }
