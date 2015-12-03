@@ -40,5 +40,12 @@ int main()
     
     getchar();
     
+    liberaMatriz(a, n);
+    liberaVetor(b);
+    liberaVetor(x);
+    liberaVetor(solucao);
+    liberaVetor(r1);
+    liberaVetor(r2);
+    
     return 0;
 }
