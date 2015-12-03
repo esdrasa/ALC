@@ -73,6 +73,16 @@ int main()
     printf("Norma do residuo da solocao de Gauss-Seidel: %lf\n", normaDois(r2, n));
 
     getchar();
+    
+    liberaMatriz(a, n);
+    liberaMatriz(l, n);
+    liberaMatriz(u, n);
+    liberaVetor(b);
+    liberaVetor(x);
+    liberaVetor(x2);
+    liberaVetor(b2);
+    liberaVetor(r1);
+    liberaVetor(r2);
 
     return 0;
 }
