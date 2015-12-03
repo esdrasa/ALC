@@ -86,9 +86,17 @@ int main(void) {
     resultado = vetorX[0]*x + vetorX[1];
     printf("Resultado com o X solicitado: %lf",resultado);
 
-
-
     getchar();
+    
+    liberaMatriz(matriz, n);
+    liberaMatriz(matrizL, n);
+    liberaMatriz(matrizMultA, n);
+    liberaMatriz(matrizTrans, n);
+    liberaMatriz(matrizU, n);
+    liberaVetor(vetorB);
+    liberaVetor(vetorB2);
+    liberaVetor(vetorX);
+    liberaVetor(matrizMultB);
 
     return 0;
 }
