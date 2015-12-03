@@ -49,5 +49,8 @@ int main()
     
     getchar();
     
+    liberaVetor(polinomio);
+    liberaVetor(raiz);
+    
     return 0;
 }
