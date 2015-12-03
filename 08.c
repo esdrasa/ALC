@@ -44,5 +44,9 @@ int main()
     
     getchar();
     
+    liberaMatriz(vetores, n);
+    liberaMatriz(base1, n);
+    liberaMatriz(base2, n);
+    
     return 0;
 }
