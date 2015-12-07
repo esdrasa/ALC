@@ -430,44 +430,44 @@ int gradienteConjugado(double** A, double* b, double* x, double tol, unsigned lo
     c = criaVetor(n);
     
     if(tol == 0)
-	tol = DBL_EPSILON;
+	    tol = DBL_EPSILON;
     
     for(i = 0; i < n; i++)
-	x[i] = b[i] / A[i][i];
+	    x[i] = b[i] / A[i][i];
     
     multiplicaVetor(A, n, n, x, r, n); // r =  Ax
     subtraiVetores(r, b, r, n); //r = Ax - b
     
     for(i = 0; i < n; i++)
-	d[i] = r[i];
+	    d[i] = r[i];
     
     while(erro >= tol && k < iMax)
     {
 	
-	multiplicaVetor(A, n, n, d, c, n); // c = Ad
-	q = (produtoEscalar(r, d, n) * (-1)) / produtoEscalar(d, c, n); // q = -<r, d> / <d, Ad>
+	    multiplicaVetor(A, n, n, d, c, n); // c = Ad
+	    q = (produtoEscalar(r, d, n) * (-1)) / produtoEscalar(d, c, n); // q = -<r, d> / <d, Ad>
 	
-	for(i = 0; i < n; i++){ // x = x0 + q*d
-	    x0[i] = x[i];
-	    x[i] = x0[i] + q*d[i];
-	}
+	    for(i = 0; i < n; i++){ // x = x0 + q*d
+	        x0[i] = x[i];
+	        x[i] = x0[i] + q*d[i];
+	    }
 	
-	multiplicaVetor(A, n, n, x, r, n); // r =  Ax
-	subtraiVetores(r, b, r, n); //r = Ax - b
+	    multiplicaVetor(A, n, n, x, r, n); // r =  Ax
+	    subtraiVetores(r, b, r, n); //r = Ax - b
 	
-	p = (produtoEscalar(r, c, n) * (-1)) / produtoEscalar(d, c, n); // p = -<r, Ad> / <d, Ad>
+	    p = (produtoEscalar(r, c, n) * (-1)) / produtoEscalar(d, c, n); // p = -<r, Ad> / <d, Ad>
 	
-	for(i = 0; i < n; i++) // d = r + p*d
-	    d[i] = r[i] + p*d[i];
+	    for(i = 0; i < n; i++) // d = r + p*d
+	        d[i] = r[i] + p*d[i];
 	
-	subtraiVetores(x, x0, x0, n); // x0 = x - x0
-	erro = normaDois(x0, n) / normaDois(x, n); // erro = |x - x0| / |x| 
+	    subtraiVetores(x, x0, x0, n); // x0 = x - x0
+	    erro = normaDois(x0, n) / normaDois(x, n); // erro = |x - x0| / |x| 
 	
-	k++;
+	    k++;
     }
     
     if(erro >= tol)
-	return 0;
+	    return 0;
     
     liberaVetor(x0);
     liberaVetor(r);
@@ -484,7 +484,7 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
     unsigned long int k = 0;
     
     if(tolerancia == 0)
-	tolerancia = DBL_EPSILON * 10;
+	    tolerancia = DBL_EPSILON * 10;
     
     deriv = criaVetor(n-1);
     
@@ -494,29 +494,29 @@ int newton(double *polinomio, double* raiz, double tolerancia, unsigned long int
     
     while(erro > tolerancia && k < iMax)
     {
-	double p, d;
+	    double p, d;
 	
-	//Calcula o valor de p no ponto (x0, p) do polinômio dado
-	p = ordenada(polinomio, x0, n);
+	    //Calcula o valor de p no ponto (x0, p) do polinômio dado
+	    p = ordenada(polinomio, x0, n);
 	
-	//Calcula a derivada no ponto (x0, p) do polinômio dado
-	d = ordenada(deriv, x0, n-1);
+	    //Calcula a derivada no ponto (x0, p) do polinômio dado
+	    d = ordenada(deriv, x0, n-1);
 	
-	//Calcula novo valor de x com base na iteração anterior, ou no x0 inicial
-	x1 = x0 - (p / d);
+	    //Calcula novo valor de x com base na iteração anterior, ou no x0 inicial
+	    x1 = x0 - (p / d);
 	    
-	erro = fabs(x1 - x0);
+	    erro = fabs(x1 - x0);
 	
-	//x0 recebe x1, pois na proxima iteração, x1 atual será o x da iteração anterior (x0)
-	x0 = x1;
+	    //x0 recebe x1, pois na proxima iteração, x1 atual será o x da iteração anterior (x0)
+	    x0 = x1;
 	
-	k++;
+	    k++;
     }
     
     liberaVetor(deriv);
     
     if(k >= iMax)
-	return 0;
+	    return 0;
     
     *raiz = x1;
     
@@ -532,16 +532,16 @@ void schmidt(double** vetores, double** base, int dimensao)
     
     for(i = 0; i < dimensao; i++)
     {
-	atribui(base[i], vetores[i], dimensao);
+	    atribui(base[i], vetores[i], dimensao);
 	
-	for(j = 0; j < i; j++)
-	{
-	    projecaoOrtogonal(vetores[i], base[j], proj, dimensao);
-	    subtraiVetores(base[i], proj, base[i], dimensao);
-	}
+	    for(j = 0; j < i; j++)
+	    {
+	        projecaoOrtogonal(vetores[i], base[j], proj, dimensao);
+	        subtraiVetores(base[i], proj, base[i], dimensao);
+	    }
 	
-	norma = normaDois(base[i], dimensao);
-	multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
+	    norma = normaDois(base[i], dimensao);
+	    multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
     }
     
     liberaVetor(proj);
@@ -556,17 +556,17 @@ void schmidtModificado(double** vetores, double** base, int dimensao)
     
     for(i = 0; i < dimensao; i++)
     {
-	atribui(base[i], vetores[i], dimensao);
+	    atribui(base[i], vetores[i], dimensao);
 	
-	for(j = 0; j < i; j++)
-	{
-	    projecaoOrtogonal(base[i], base[j], proj, dimensao);
+	    for(j = 0; j < i; j++)
+	    {
+	        projecaoOrtogonal(base[i], base[j], proj, dimensao);
 	    
-	    subtraiVetores(base[i], proj, base[i], dimensao);
-	}
+	        subtraiVetores(base[i], proj, base[i], dimensao);
+	    }
 	
-	norma = normaDois(base[i], dimensao);
-	multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
+	    norma = normaDois(base[i], dimensao);
+	    multiplicaPorEscalar(base[i], base[i], 1/norma, dimensao);
     }
     
     liberaVetor(proj);
@@ -663,7 +663,7 @@ void perturba(double* x, double* xp, double intervalo, int n)
 
 void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls, double li, int nr, int n)
 {
-    double *xp, *r, *rp, rnd0, rnd = 0, normaRp, normaR, variacao, intervalo = 2;
+    double *xp, *r, *rp, rnd0, rnd = 0, normaRp, normaR, variacao, intervalo = 0.0001;
     int i, j;
     
     rnd0 = aleatorio();
@@ -678,40 +678,37 @@ void simulatedAnnealing(double** A, double* b, double* x, double alfa, double ls
     
     while(ls > li)
     {
-	for(i = 0; i < nr; i++)
-	{
-	    perturba(x, xp, intervalo, n);
-	    
-	    residuo(A, x, b, r, n);
-	    residuo(A, xp, b, rp, n);
-	    
-	    normaRp = normaDois(rp, n);
-	    normaR = normaDois(r, n);
-	    
-	    if(normaRp < 1)
-		    intervalo = 0.2;
-	    
-	    if(normaRp <= normaR)
+	    for(i = 0; i < nr; i++)
 	    {
-		atribui(x, xp, n);
+	        perturba(x, xp, intervalo, n);
+	    
+	        residuo(A, x, b, r, n);
+	        residuo(A, xp, b, rp, n);
+	    
+	        normaRp = normaDois(rp, n);
+	        normaR = normaDois(r, n);
+	    
+	        if(normaRp <= normaR)
+	        {
+		        atribui(x, xp, n);
+	        }
+	        else
+	        {
+		        while(rnd == rnd0)
+		            rnd = aleatorio();
+		
+		        rnd0 = rnd;
+		
+		        variacao = normaRp - normaR;
+		
+		        if(rnd < exp(-variacao / ls))
+		        {
+    		        atribui(x, xp, n);
+		        }
+	        }
 	    }
-	    else
-	    {
-		while(rnd == rnd0)
-		    rnd = aleatorio();
-		
-		rnd0 = rnd;
-		
-		variacao = normaRp - normaR;
-		
-		if(rnd < exp(-variacao / ls))
-		{
-		    atribui(x, xp, n);
-		}
-	    }
-	}
 	
-	ls *= alfa;
+	    ls *= alfa;
     }
     
     liberaVetor(xp);
@@ -759,14 +756,14 @@ void PSO(double **matrizA, int n, double *vetorB, double *MB, double tol, int pa
 
     for(i = 0; i < particulas; i++) /// Comparar com as outras particulas para saber qual é a melhor do bando
     {
-	getColuna(S, vetMB, i, n);
+	    getColuna(S, vetMB, i, n);
         residuo(matrizA, vetMB, vetorB, vResiduo, n);
         if(normaMB > normaDois(vResiduo,n))
         {
-	    for(j = 0; j < n; j++)
+	        for(j = 0; j < n; j++)
             {
                 MB[j] = vetMB[j];
-	    }
+	        }
             normaMB = normaDois(vResiduo,n);
         }
     } /// Já tenho o vetor MB
