@@ -158,7 +158,7 @@ int main()
 
   vetorNulo(vetNulo, n);
 
-  PSO(AtA, n, vetNulo, v3, 0.0000001, 50);  // encontra o terceiro alto vetor de AtA que é o vetor v3 ... vn esta dentro do for apenas para variar
+  PSO(AtA, n, vetNulo, v3, 0.000000000001, 800);  // encontra o terceiro alto vetor de AtA que é o vetor v3 ... vn esta dentro do for apenas para variar
   //  retirar PSO do ciclo aumenta a velocidade do algoritmo, mas deixa varias linhas da matriz Vt iguais
 
   for(i = 0; i < n; i++)
