@@ -9,8 +9,8 @@
 int main(){
 
     double **matrizA, *vetorB, *vetorX, *residuoPSO, *residuoSimulated;
-    double tol = 0.000001, tempMax = 100, tempMin = 0.01, alfa = 0.7, normaPSO, normaSimulated;
-    int n = 2, particulas = 5, i, iteracoes = 1000;
+    double tol, tempMax, tempMin, alfa, normaPSO, normaSimulated;
+    int n, particulas, i, iteracoes;
 
     printf("Digite a dimensao da matriz A: ");
     scanf("%d%*c", &n);
